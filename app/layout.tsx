@@ -15,12 +15,12 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "DAMIANUS SAVIOLA MATURBONGS ★ Creative Frontend Developer & UI Engineer",
+  title: "damisaviola.",
   description: "Portfolio Neo Brutalism UI berani, modern, dan interaktif karya Damianus Saviola Maturbongs - Creative Frontend Developer, UI Engineer, dan Creative Coder.",
   keywords: ["Damianus Saviola Maturbongs", "Frontend Developer", "UI Engineer", "Neo Brutalism", "React", "Next.js", "Portfolio", "Creative Coder"],
   authors: [{ name: "Damianus Saviola Maturbongs" }],
   openGraph: {
-    title: "DAMIANUS SAVIOLA MATURBONGS ★ Creative Frontend Developer",
+    title: "damisaviola.",
     description: "Portofolio Neo Brutalism UI yang berani, penuh warna, dan interaktif.",
     type: "website",
   },

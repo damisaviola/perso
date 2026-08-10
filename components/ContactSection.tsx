@@ -13,6 +13,7 @@ import { PORTFOLIO_DATA } from "@/lib/data";
 import {
   GithubIcon,
   LinkedinIcon,
+  YoutubeIcon,
 } from "./SocialIcons";
 
 export default function ContactSection() {
@@ -46,6 +47,7 @@ export default function ContactSection() {
     { name: "Email", href: `mailto:${PORTFOLIO_DATA.personal.email}`, icon: Mail, color: "#FF5A5F" },
     { name: "GitHub", href: PORTFOLIO_DATA.personal.github, icon: GithubIcon, color: "#111111" },
     { name: "LinkedIn", href: PORTFOLIO_DATA.personal.linkedin, icon: LinkedinIcon, color: "#3B82F6" },
+    { name: "YouTube", href: PORTFOLIO_DATA.personal.youtube, icon: YoutubeIcon, color: "#FF0000" },
   ];
 
   return (
@@ -191,7 +193,7 @@ export default function ContactSection() {
                       className="neo-btn p-3 rounded-2xl flex flex-col items-center justify-center gap-1.5 font-heading font-bold text-xs text-[#111111]"
                       style={{
                         backgroundColor: s.color === "#111111" ? "#FFD60A" : s.color,
-                        color: s.color === "#3B82F6" || s.color === "#FF5A5F" || s.color === "#EC4899" ? "#FFFFFF" : "#111111"
+                        color: s.color === "#3B82F6" || s.color === "#FF5A5F" || s.color === "#EC4899" || s.color === "#FF0000" ? "#FFFFFF" : "#111111"
                       }}
                     >
                       <Icon className="w-5 h-5" />

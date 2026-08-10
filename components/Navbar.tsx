@@ -7,7 +7,7 @@ import { PORTFOLIO_DATA } from "@/lib/data";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface NavbarProps {
-  onOpenCvModal: () => void;
+  onOpenCvModal?: () => void;
 }
 
 export default function Navbar({ onOpenCvModal }: NavbarProps) {
@@ -66,15 +66,6 @@ export default function Navbar({ onOpenCvModal }: NavbarProps) {
           {/* Dark Mode Toggle */}
           <ThemeToggle />
 
-          {/* Download CV */}
-          <button
-            onClick={onOpenCvModal}
-            className="hidden sm:flex items-center gap-2 bg-[#3B82F6] text-white neo-btn px-3.5 py-2 rounded-xl font-heading font-extrabold text-xs sm:text-sm tracking-wide"
-          >
-            <Download className="w-4 h-4" />
-            <span>CV</span>
-          </button>
-
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -112,17 +103,6 @@ export default function Navbar({ onOpenCvModal }: NavbarProps) {
                   <Terminal className="w-4 h-4 text-[#FF5A5F]" />
                 </a>
               ))}
-
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onOpenCvModal();
-                }}
-                className="mt-2 w-full flex items-center justify-center gap-2 bg-[#3B82F6] text-white neo-btn px-4 py-3 rounded-xl font-heading font-black text-sm"
-              >
-                <Download className="w-4 h-4" />
-                <span>DOWNLOAD CV</span>
-              </button>
             </div>
           </motion.div>
         )}

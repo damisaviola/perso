@@ -1,68 +1,103 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-
 import ProjectsSection from "@/components/ProjectsSection";
-import ExperienceSection from "@/components/ExperienceSection";
-import BlogSection from "@/components/BlogSection";
-import FaqSection from "@/components/FaqSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import StickerPlayground from "@/components/StickerPlayground";
-import CvModal from "@/components/CvModal";
 import GithubSection from "@/components/GithubSection";
+import ExperienceSection from "@/components/ExperienceSection";
+import ContactSection from "@/components/ContactSection";
+
 import LetterboxdSection from "@/components/LetterboxdSection";
+import ComicsSection from "@/components/ComicsSection";
+import SteamSection from "@/components/SteamSection";
+import SpotifySection from "@/components/SpotifySection";
+import BlogSection from "@/components/BlogSection";
+import StickerPlayground from "@/components/StickerPlayground";
+import Footer from "@/components/Footer";
 
 export default function Home() {
-  const [isCvModalOpen, setIsCvModalOpen] = useState(false);
+  const [activeMode, setActiveMode] = useState<"work" | "hobbies">("work");
+
+  // Sync mode with URL hash if visitor navigates via direct hash link
+  useEffect(() => {
+    const handleHashSync = () => {
+      const hash = window.location.hash;
+      if (["#letterboxd", "#comics", "#steam", "#spotify", "#blog", "#canvas"].includes(hash)) {
+        setActiveMode("hobbies");
+      } else if (["#projects", "#github", "#experience", "#contact"].includes(hash)) {
+        setActiveMode("work");
+      }
+    };
+
+    handleHashSync();
+    window.addEventListener("hashchange", handleHashSync);
+    return () => window.removeEventListener("hashchange", handleHashSync);
+  }, []);
 
   return (
-    <main className="min-h-screen relative overflow-x-hidden selection:bg-[#FFD60A] selection:text-[#111111]">
-      {/* Sticky Header Navbar */}
-      <Navbar onOpenCvModal={() => setIsCvModalOpen(true)} />
+    <main className="min-h-screen relative overflow-x-hidden">
+      {/* Sticky Apple Header Navbar */}
+      <Navbar activeMode={activeMode} onSelectMode={setActiveMode} />
 
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Hero Section with Dual Mode Apple Segmented Control */}
+      <HeroSection activeMode={activeMode} onSelectMode={setActiveMode} />
 
-      {/* About Me Section */}
-      <AboutSection />
+      {/* Dual Mode Landing Page Content */}
+      <AnimatePresence mode="wait">
+        {activeMode === "work" ? (
+          <motion.div
+            key="work-mode-content"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Projects Showcase (Imageless developer cards) */}
+            <ProjectsSection />
 
+            {/* GitHub Contributions Activity */}
+            <GithubSection />
 
-      {/* Projects Showcase */}
-      <ProjectsSection />
+            {/* Professional Experience & Education */}
+            <ExperienceSection />
 
-      {/* Github Contributions */}
-      <GithubSection />
+            {/* Contact & Inquiries */}
+            <ContactSection />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="hobbies-mode-content"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Letterboxd Recent Watches */}
+            <LetterboxdSection />
 
-      {/* Letterboxd Recent Watches */}
-      <LetterboxdSection />
+            {/* Top 10 Comics & Graphic Novels */}
+            <ComicsSection />
 
-      {/* Experience Timeline */}
-      <ExperienceSection />
+            {/* Steam Profile & Games Activity */}
+            <SteamSection />
 
-      {/* Articles & Insights */}
-      <BlogSection />
+            {/* Spotify Playlist & Listening Activity */}
+            <SpotifySection />
 
-      {/* FAQ Accordions */}
-      <FaqSection />
+            {/* Articles, Reading & Notes */}
+            <BlogSection />
 
-      {/* Interactive Sticker Board */}
-      <StickerPlayground />
-
-      {/* Contact Form & Socials */}
-      <ContactSection />
+            {/* Interactive Visitor Stamp Canvas */}
+            <StickerPlayground />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Footer & Back to Top */}
-      <Footer />
-
-      {/* Curriculum Vitae Modal */}
-      <CvModal
-        isOpen={isCvModalOpen}
-        onClose={() => setIsCvModalOpen(false)}
-      />
+      <Footer activeMode={activeMode} onSelectMode={setActiveMode} />
     </main>
   );
 }

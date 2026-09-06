@@ -18,11 +18,11 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://damisaviola.com"),
   title: {
-    default: "Damianus Saviola | Creative Frontend Developer & UI Engineer",
+    default: "Damianus Saviola | Personal Website",
     template: "%s | damisaviola.",
   },
-  description: "Portfolio Neo Brutalism UI berani, modern, dan interaktif karya Damianus Saviola Maturbongs - Creative Frontend Developer, UI Engineer, dan Creative Coder.",
-  keywords: ["Damianus Saviola Maturbongs", "Frontend Developer", "UI Engineer", "Neo Brutalism", "React", "Next.js", "Portfolio", "Creative Coder", "Web Developer Indonesia"],
+  description: "Situs personal Damianus Saviola Maturbongs — proyek web, aktivitas GitHub, tontonan film di Letterboxd, dan catatan.",
+  keywords: ["Damianus Saviola Maturbongs", "Dami Saviola", "Personal Website", "Web Developer", "React", "Next.js", "Laravel", "Yogyakarta", "Letterboxd", "Indonesia"],
   authors: [{ name: "Damianus Saviola Maturbongs", url: "https://github.com/damisaviola" }],
   creator: "Damianus Saviola Maturbongs",
   publisher: "Damianus Saviola Maturbongs",
@@ -32,27 +32,18 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Damianus Saviola | Creative Frontend Developer",
-    description: "Portofolio Neo Brutalism UI yang berani, penuh warna, dan interaktif karya Damianus Saviola Maturbongs.",
+    title: "Damianus Saviola | Personal Website",
+    description: "Situs personal Damianus Saviola Maturbongs — kumpulan proyek web, catatan, dan aktivitas.",
     url: "/",
-    siteName: "damisaviola. Portfolio",
+    siteName: "damisaviola.",
     locale: "id_ID",
     type: "website",
-    // images: [
-    //   {
-    //     url: "/og-image.png", // Tambahkan gambar og-image.png (1200x630) di folder public/
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "damisaviola. Portfolio Preview",
-    //   },
-    // ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Damianus Saviola | Creative Frontend Developer",
-    description: "Portofolio Neo Brutalism UI yang berani, penuh warna, dan interaktif.",
-    creator: "@damisaviola", // Ganti dengan username twitter kamu jika ada
-    // images: ["/og-image.png"], // Tambahkan gambar og-image.png di folder public/
+    title: "Damianus Saviola | Personal Website",
+    description: "Situs personal Damianus Saviola Maturbongs — kumpulan proyek web, catatan, dan aktivitas.",
+    creator: "@damisaviola",
   },
   robots: {
     index: true,
@@ -66,7 +57,6 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // google: "your-google-site-verification", // Tambahkan jika mendaftar Google Search Console
   }
 };
 
@@ -84,7 +74,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body 
-        className="font-sans bg-[#FFF9F0] text-[#111111] dark:bg-[#0F0F12] dark:text-[#F3F4F6] selection:bg-[#FFD60A] selection:text-[#111111] transition-colors duration-300 min-h-screen"
+        className="font-sans bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#000000] dark:text-[#f5f5f7] selection:bg-[#0071e3] selection:text-white dark:selection:bg-[#2997ff] dark:selection:text-[#000000] transition-colors duration-200 min-h-screen antialiased"
         suppressHydrationWarning
       >
         <ThemeProvider

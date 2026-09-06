@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { PORTFOLIO_DATA, ServiceItem } from "@/lib/data";
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Code2,
   Palette,
   Rocket,

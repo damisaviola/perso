@@ -4,13 +4,32 @@
 
 @layer base {
   :root {
-    --font-heading: var(--font-space-grotesk), sans-serif;
-    --font-body: var(--font-plus-jakarta), sans-serif;
+    --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-space-grotesk), sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-plus-jakarta), sans-serif;
+    --bg-canvas: #f5f5f7;
+    --bg-surface: #ffffff;
+    --fg-primary: #1d1d1f;
+    --fg-secondary: #86868b;
+    --border-subtle: rgba(0, 0, 0, 0.07);
+    --accent-apple: #0071e3;
+  }
+
+  .dark {
+    --bg-canvas: #000000;
+    --bg-surface: #161617;
+    --fg-primary: #f5f5f7;
+    --fg-secondary: #86868b;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --accent-apple: #2997ff;
   }
 }
 
 body {
   font-family: var(--font-body);
+  background-color: var(--bg-canvas);
+  color: var(--fg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -21,216 +40,103 @@ h5,
 h6,
 .font-heading {
   font-family: var(--font-heading);
+  letter-spacing: -0.03em;
 }
 
-/* Neo Brutalism Utilities */
-.neo-border {
-  border: 3.5px solid #111111;
+/* Premium Apple Card Surface */
+.apple-card,
+.surface-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 4px 16px -2px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .neo-border {
-  border: 3.5px solid #ffffff;
+.dark .apple-card,
+.dark .surface-card {
+  background-color: #161617;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 8px 24px -4px rgba(0, 0, 0, 0.4);
 }
 
-.neo-border-sm {
-  border: 2px solid #111111;
+.apple-card:hover,
+.surface-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.07);
 }
 
-.dark .neo-border-sm {
-  border: 2px solid #ffffff;
+.dark .apple-card:hover,
+.dark .surface-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 30px -6px rgba(0, 0, 0, 0.6);
 }
 
-/* Hard Offset Shadows */
-.neo-shadow {
-  box-shadow: 6px 6px 0px 0px #111111;
+/* Apple Buttons */
+.apple-btn-primary {
+  background-color: var(--accent-apple);
+  color: #ffffff;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .neo-shadow {
-  box-shadow: 6px 6px 0px 0px #ffffff;
+.apple-btn-primary:hover {
+  opacity: 0.94;
+  transform: scale(1.01);
 }
 
-.neo-shadow-lg {
-  box-shadow: 9px 9px 0px 0px #111111;
+.apple-btn-secondary {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--fg-primary);
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .neo-shadow-lg {
-  box-shadow: 9px 9px 0px 0px #ffffff;
+.dark .apple-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
-.neo-shadow-xl {
-  box-shadow: 12px 12px 0px 0px #111111;
+.apple-btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.07);
 }
 
-.dark .neo-shadow-xl {
-  box-shadow: 12px 12px 0px 0px #ffffff;
+.dark .apple-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-.neo-shadow-yellow {
-  box-shadow: 6px 6px 0px 0px #FFD60A;
-}
-
-.neo-shadow-blue {
-  box-shadow: 6px 6px 0px 0px #3B82F6;
-}
-
-.neo-shadow-pink {
-  box-shadow: 6px 6px 0px 0px #EC4899;
-}
-
-/* Interactive Button Effects */
-.neo-btn {
-  border: 3.5px solid #111111;
-  box-shadow: 5px 5px 0px 0px #111111;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dark .neo-btn {
-  border: 3.5px solid #ffffff;
-  box-shadow: 5px 5px 0px 0px #ffffff;
-}
-
-.neo-btn:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 8px 8px 0px 0px #111111;
-}
-
-.dark .neo-btn:hover {
-  box-shadow: 8px 8px 0px 0px #ffffff;
-}
-
-.neo-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px 0px #111111;
-}
-
-.dark .neo-btn:active {
-  box-shadow: 2px 2px 0px 0px #ffffff;
-}
-
-/* Card Hover Animation */
-.neo-card {
-  border: 3.5px solid #111111;
-  box-shadow: 6px 6px 0px 0px #111111;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.dark .neo-card {
-  border: 3.5px solid #ffffff;
-  box-shadow: 6px 6px 0px 0px #ffffff;
-}
-
-.neo-card-hover:hover {
-  transform: translateY(-6px) rotate(-1deg) scale(1.02);
-  box-shadow: 12px 12px 0px 0px #111111;
-}
-
-.dark .neo-card-hover:hover {
-  box-shadow: 12px 12px 0px 0px #ffffff;
-}
-
-/* Decorative Background Grid Patterns */
-.bg-neo-grid {
-  background-image: radial-gradient(#111111 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-.dark .bg-neo-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px);
-}
-
-.bg-neo-lines {
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(17, 17, 17, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(17, 17, 17, 0.08) 1px, transparent 1px);
-}
-
-.dark .bg-neo-lines {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-}
-
-/* Floating Animation Keyframes */
-@keyframes floatSlow {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-12px) rotate(3deg);
-  }
-}
-
-@keyframes floatReverse {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(10px) rotate(-4deg);
-  }
-}
-
-@keyframes pulseGlow {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-}
-
-.animate-float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: floatReverse 7s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-/* Custom Scrollbar */
+/* Apple Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFF9F0;
-  border-left: 3px solid #111111;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #0F0F12;
-  border-left: 3px solid #ffffff;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFD60A;
-  border: 3px solid #111111;
-  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF5A5F;
+  background: rgba(0, 0, 0, 0.22);
 }
 
-/* Hide Scrollbar Utility */
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

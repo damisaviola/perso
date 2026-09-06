@@ -22,12 +22,14 @@ export interface Project {
   badge: "NEW" | "FEATURED" | "BEST" | "OPEN SOURCE";
   description: string;
   longDescription: string;
-  image: string;
+  image?: string;
   techStack: string[];
   liveUrl: string;
   githubUrl: string;
   bgColor: string;
   accentColor: string;
+  stars?: number;
+  pushedAt?: string;
 }
 
 export interface Skill {
@@ -87,6 +89,19 @@ export interface FaqItem {
   question: string;
   answer: string;
   color: string;
+}
+
+export interface ComicBook {
+  id: string;
+  rank: number;
+  title: string;
+  creator: string;
+  year: string;
+  publisher: string;
+  synopsis: string;
+  quote?: string;
+  tag: string;
+  link: string;
 }
 
 // Portfolio Data
@@ -397,4 +412,127 @@ export const PORTFOLIO_DATA = {
       color: "#22C55E",
     },
   ] as FaqItem[],
+
+  comics: [
+    {
+      id: "comic-1",
+      rank: 1,
+      title: "Watchmen",
+      creator: "Alan Moore & Dave Gibbons",
+      year: "1986",
+      publisher: "DC Comics",
+      synopsis: "Dekonstruksi paling berpengaruh dalam sejarah komik tentang moralitas abu-abu, paranoia Perang Dingin, dan apa jadinya jika pahlawan super benar-benar hadir di dunia nyata.",
+      quote: "Quis custodiet ipsos custodes? (Siapa yang mengawasi para pengawas?)",
+      tag: "Masterpiece • Graphic Novel",
+      link: "https://en.wikipedia.org/wiki/Watchmen",
+    },
+    {
+      id: "comic-2",
+      rank: 2,
+      title: "Batman: The Dark Knight Returns",
+      creator: "Frank Miller, Klaus Janson & Lynn Varley",
+      year: "1986",
+      publisher: "DC Comics",
+      synopsis: "Bruce Wayne di usia 55 tahun kembali mengenakan jubah kelelawar di Gotham yang terpuruk, memuncak pada konfrontasi filosofis dengan Superman yang mendefinisikan komik modern.",
+      quote: "Malam ini kita adalah hukum.",
+      tag: "Gritty Noir • Classic",
+      link: "https://en.wikipedia.org/wiki/The_Dark_Knight_Returns",
+    },
+    {
+      id: "comic-3",
+      rank: 3,
+      title: "X-Men: God Loves, Man Kills",
+      creator: "Chris Claremont & Brent Anderson",
+      year: "1982",
+      publisher: "Marvel Graphic Novel",
+      synopsis: "Eksplorasi emosional tentang kefanatikan agama Reverend Stryker dan kebencian terhadap kaum mutan, memaksa X-Men bersekutu dengan musuh bebuyutan mereka, Magneto.",
+      quote: "Bukan mutasi yang membuat kita manusia, melainkan hati kita.",
+      tag: "Social Commentary • Classic",
+      link: "https://en.wikipedia.org/wiki/X-Men:_God_Loves,_Man_Kills",
+    },
+    {
+      id: "comic-4",
+      rank: 4,
+      title: "Daredevil by Frank Miller (Born Again)",
+      creator: "Frank Miller & David Mazzucchelli",
+      year: "1986",
+      publisher: "Marvel Comics",
+      synopsis: "Kingpin mengetahui identitas rahasia Matt Murdock dan menghancurkan hidupnya hingga ke titik nadir, mengantarkan perjalanan spiritual dan kebangkitan Man Without Fear.",
+      quote: "Seorang pria tanpa harapan adalah pria tanpa rasa takut.",
+      tag: "Crime Noir • Masterwork",
+      link: "https://en.wikipedia.org/wiki/Born_Again_(comics)",
+    },
+    {
+      id: "comic-5",
+      rank: 5,
+      title: "Kingdom Come",
+      creator: "Mark Waid & Alex Ross",
+      year: "1996",
+      publisher: "DC Elseworlds",
+      synopsis: "Masa depan ketika pahlawan generasi baru kehilangan kompas moral, memaksa generasi pahlawan lama kembali dengan arahan visual lukisan cat air Alex Ross yang legendaris.",
+      quote: "Ada garis tipis antara keadilan dan tirani.",
+      tag: "Painted Art • Elseworlds",
+      link: "https://en.wikipedia.org/wiki/Kingdom_Come_(comics)",
+    },
+    {
+      id: "comic-6",
+      rank: 6,
+      title: "X-Men: Days of Future Past",
+      creator: "Chris Claremont & John Byrne",
+      year: "1981",
+      publisher: "Marvel Comics",
+      synopsis: "Masa depan distopis di mana mutan diburu Sentinel, memicu misi perjalanan waktu Kitty Pryde untuk mencegah bencana besar yang mengubah semesta Marvel selamanya.",
+      quote: "Masa depan bukanlah sesuatu yang kita warisi, melainkan sesuatu yang kita bangun.",
+      tag: "Dystopian Sci-Fi • Time Travel",
+      link: "https://en.wikipedia.org/wiki/Days_of_Future_Past",
+    },
+    {
+      id: "comic-7",
+      rank: 7,
+      title: "Crisis on Infinite Earths",
+      creator: "Marv Wolfman & George Pérez",
+      year: "1985",
+      publisher: "DC Comics",
+      synopsis: "Peristiwa crossover multiversal pertama yang mengatur ulang seluruh kontinuitas DC dengan skala kehancuran epik saat Anti-Monitor mengancam menghapus realitas.",
+      quote: "Dunia akan hidup, dunia akan mati, dan alam semesta takkan pernah sama.",
+      tag: "Cosmic Multiverse • Historic",
+      link: "https://en.wikipedia.org/wiki/Crisis_on_Infinite_Earths",
+    },
+    {
+      id: "comic-8",
+      rank: 8,
+      title: "Mister Miracle",
+      creator: "Tom King & Mitch Gerads",
+      year: "2017",
+      publisher: "DC Comics",
+      synopsis: "Scott Free, ahli pelarian terhebat dari New Gods, bergulat dengan depresi, perang antargalaksi Apokolips, dan makna realitas bersama belahan jiwanya, Big Barda.",
+      quote: "Darkseid Is. Dan cinta adalah satu-satunya jalan keluar.",
+      tag: "Psychological Drama • Eisner Winner",
+      link: "https://en.wikipedia.org/wiki/Mister_Miracle_(comic_book)",
+    },
+    {
+      id: "comic-9",
+      rank: 9,
+      title: "V for Vendetta",
+      creator: "Alan Moore & David Lloyd",
+      year: "1982–1989",
+      publisher: "Vertigo / DC Comics",
+      synopsis: "Melawan tirani fasis totaliter di Britania masa depan, sosok misterius bertopeng Guy Fawkes memicu revolusi teatrikal yang membakar nurani rakyat.",
+      quote: "Gagasan tidak mempan terhadap peluru.",
+      tag: "Political Dystopia • Graphic Novel",
+      link: "https://en.wikipedia.org/wiki/V_for_Vendetta",
+    },
+    {
+      id: "comic-10",
+      rank: 10,
+      title: "King in Black",
+      creator: "Donny Cates & Ryan Stegman",
+      year: "2020–2021",
+      publisher: "Marvel Comics",
+      synopsis: "Puncak saga Venom ketika Knull, dewa purba para symbiote, menyerbu bumi dan menenggelamkan planet ke dalam kegelapan pekat yang menguji seluruh pahlawan Marvel.",
+      quote: "Cahaya terdalam lahir dari jurang kegelapan paling pekat.",
+      tag: "Cosmic Horror • Symbiote Saga",
+      link: "https://en.wikipedia.org/wiki/King_in_Black",
+    },
+  ] as ComicBook[],
 };

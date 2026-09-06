@@ -47,7 +47,7 @@ export default function TestimonialsSection() {
 
                   {/* Speech Bubble Quote */}
                   <div className="bg-white dark:bg-[#1A1A28] neo-border p-4 rounded-2xl text-[#111111] dark:text-gray-200 font-medium text-sm sm:text-base leading-relaxed shadow-neo">
-                    "{item.quote}"
+                    &ldquo;{item.quote}&rdquo;
                   </div>
                 </div>
 

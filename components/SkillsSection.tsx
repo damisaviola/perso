@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-
 
 import {
   Code2,
@@ -24,7 +22,7 @@ import {
 import { PORTFOLIO_DATA, Skill } from "@/lib/data";
 import { FigmaIcon } from "./SocialIcons";
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Code2,
   FileCode,
   Palette,

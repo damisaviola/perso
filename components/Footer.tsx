@@ -1,74 +1,105 @@
 "use client";
 
-import { ArrowUp, Heart } from "lucide-react";
+import { ArrowUp, Briefcase, Film } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/lib/data";
 import {
   GithubIcon,
   LinkedinIcon,
-  YoutubeIcon,
-  InstagramIcon,
 } from "./SocialIcons";
 
-export default function Footer() {
+interface FooterProps {
+  activeMode?: "work" | "hobbies";
+  onSelectMode?: (mode: "work" | "hobbies") => void;
+}
+
+export default function Footer({ activeMode = "work", onSelectMode }: FooterProps) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="bg-[#111111] text-white neo-border-t border-[#111111] pt-12 pb-12 px-4 sm:px-8 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto space-y-8">
-        
-        {/* Middle Footer Navigation */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-2">
-          
-          <div className="md:col-span-5 space-y-3">
-            <div>
-              <span className="font-heading font-black text-2xl sm:text-3xl tracking-tight uppercase text-white">
-                damisaviola.
-              </span>
-            </div>
+    <footer className="py-10 sm:py-12 px-4 sm:px-8 border-t border-black/[0.05] dark:border-white/[0.06] bg-[#f5f5f7] dark:bg-[#000000]">
+      <div className="max-w-5xl mx-auto space-y-6">
 
+        {/* Top Row: Brand & Quick Navigation */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span className="font-heading font-semibold text-base sm:text-lg tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7]">
+              damisaviola<span className="text-[#0071e3] dark:text-[#2997ff]">.</span>
+            </span>
           </div>
 
           {/* Nav Quick Links */}
-          <div className="md:col-span-4 flex flex-wrap gap-4 font-heading font-bold text-sm">
-            <a href="#hero" className="hover:text-[#FFD60A] transition-colors">Home</a>
-            <a href="#about" className="hover:text-[#FFD60A] transition-colors">About</a>
-            <a href="#projects" className="hover:text-[#FFD60A] transition-colors">Projects</a>
-            <a href="#experience" className="hover:text-[#FFD60A] transition-colors">Experience</a>
-            <a href="#contact" className="hover:text-[#FFD60A] transition-colors">Contact</a>
+          <div className="flex flex-wrap items-center gap-3.5 sm:gap-5 text-xs text-[#86868b]">
+            <a href="#hero" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Awal</a>
+            
+            {activeMode === "work" ? (
+              <>
+                <a href="#projects" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Proyek</a>
+                <a href="#github" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">GitHub</a>
+                <a href="#experience" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Pengalaman</a>
+                <a href="#contact" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Kontak</a>
+                {onSelectMode && (
+                  <button
+                    onClick={() => onSelectMode("hobbies")}
+                    className="inline-flex items-center gap-1 text-[#0071e3] dark:text-[#2997ff] hover:underline cursor-pointer py-1 ml-1"
+                  >
+                    <Film className="w-3 h-3" />
+                    <span>Mode Hobi</span>
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <a href="#letterboxd" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Film</a>
+                <a href="#comics" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Komik</a>
+                <a href="#steam" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Steam</a>
+                <a href="#spotify" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Musik</a>
+                <a href="#blog" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Catatan</a>
+                <a href="#canvas" className="hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors py-1">Kanvas</a>
+                {onSelectMode && (
+                  <button
+                    onClick={() => onSelectMode("work")}
+                    className="inline-flex items-center gap-1 text-[#0071e3] dark:text-[#2997ff] hover:underline cursor-pointer py-1 ml-1"
+                  >
+                    <Briefcase className="w-3 h-3" />
+                    <span>Mode Kerjaan</span>
+                  </button>
+                )}
+              </>
+            )}
           </div>
-
-          {/* Social Icons */}
-          <div className="md:col-span-3 flex items-center gap-3 justify-start md:justify-end">
-            <a href={PORTFOLIO_DATA.personal.github} target="_blank" rel="noreferrer" className="w-10 h-10 bg-white dark:bg-[#1A1A28] text-[#111111] dark:text-white neo-btn rounded-xl flex items-center justify-center">
-              <GithubIcon className="w-5 h-5" />
-            </a>
-            <a href={PORTFOLIO_DATA.personal.linkedin} target="_blank" rel="noreferrer" className="w-10 h-10 bg-[#3B82F6] text-white neo-btn rounded-xl flex items-center justify-center">
-              <LinkedinIcon className="w-5 h-5" />
-            </a>
-            <a href={PORTFOLIO_DATA.personal.youtube} target="_blank" rel="noreferrer" className="w-10 h-10 bg-[#FF0000] text-white neo-btn rounded-xl flex items-center justify-center">
-              <YoutubeIcon className="w-5 h-5" />
-            </a>
-            <a href={PORTFOLIO_DATA.personal.instagram} target="_blank" rel="noreferrer" className="w-10 h-10 bg-[#EC4899] text-white neo-btn rounded-xl flex items-center justify-center">
-              <InstagramIcon className="w-5 h-5" />
-            </a>
-          </div>
-
         </div>
 
-        {/* Bottom Bar & Back to Top */}
-        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-heading font-bold text-xs text-gray-400">
-          <div className="flex items-center flex-wrap justify-center sm:justify-start gap-1.5 text-center sm:text-left">
-            <span>© {new Date().getFullYear()} damsaviola</span>
+        {/* Bottom Bar */}
+        <div className="pt-6 border-t border-black/[0.05] dark:border-white/[0.06] flex items-center justify-between gap-4 text-xs text-[#86868b]">
+          <div className="flex items-center gap-1.5">
+            <a
+              href={PORTFOLIO_DATA.personal.github}
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 rounded-full hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors"
+              aria-label="GitHub"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={PORTFOLIO_DATA.personal.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 rounded-full hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors"
+              aria-label="LinkedIn"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+            </a>
           </div>
 
           <button
             onClick={scrollToTop}
-            className="bg-[#FFD60A] text-[#111111] neo-btn px-4 py-2 rounded-xl font-heading font-black text-xs flex items-center gap-1.5 cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors cursor-pointer py-1 active:scale-95"
           >
-            <span>BACK TO TOP</span>
-            <ArrowUp className="w-4 h-4" />
+            <span>Atas</span>
+            <ArrowUp className="w-3 h-3" />
           </button>
         </div>
 

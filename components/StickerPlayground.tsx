@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Trash2, Smile, Zap, Heart, Star, Flame, ThumbsUp } from "lucide-react";
+import { Trash2, Smile, Zap, Heart, Star, Code2, Terminal } from "lucide-react";
 
 interface Sticker {
   id: number;
@@ -13,8 +13,8 @@ interface Sticker {
   rotation: number;
 }
 
-const stickerIcons = [Star, Zap, Smile, Heart, Flame, ThumbsUp];
-const stickerColors = ["#FFD60A", "#FF5A5F", "#3B82F6", "#22C55E", "#EC4899", "#8B5CF6"];
+const stickerIcons = [Code2, Terminal, Zap, Heart, Star, Smile];
+const stickerColors = ["#2563EB", "#0F172A", "#10B981", "#F59E0B", "#8B5CF6", "#EC4899"];
 
 export default function StickerPlayground() {
   const [stickers, setStickers] = useState<Sticker[]>([]);
@@ -30,11 +30,11 @@ export default function StickerPlayground() {
       x,
       y,
       iconIndex: activeIconIndex,
-      color: stickerColors[Math.floor(Math.random() * stickerColors.length)],
-      rotation: Math.floor(Math.random() * 40) - 20,
+      color: stickerColors[activeIconIndex],
+      rotation: Math.floor(Math.random() * 24) - 12,
     };
 
-    setStickers((prev) => [...prev.slice(-15), newSticker]); // Keep last 15
+    setStickers((prev) => [...prev.slice(-20), newSticker]);
   };
 
   const clearStickers = () => {
@@ -42,86 +42,88 @@ export default function StickerPlayground() {
   };
 
   return (
-    <section className="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
-      <div className="bg-[#FFD60A] neo-card p-6 sm:p-8 rounded-3xl space-y-6">
+    <section id="canvas" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]">
+      <div className="max-w-5xl mx-auto">
         
-        {/* Widget Top Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Top Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-black/[0.05] dark:border-white/[0.06]">
           <div>
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#FF5A5F]" />
-              <h3 className="font-heading font-black text-2xl uppercase text-[#111111]">
-                INTERACTIVE STICKER BOARD 🎨
-              </h3>
-            </div>
-            <p className="text-xs sm:text-sm font-bold text-[#111111]/80">
-              Pilih stiker favorit lalu klik di dalam papan canvas di bawah untuk menempelkan stiker Neo Brutalism!
+            <span className="text-xs sm:text-[13px] font-medium text-[#0071e3] dark:text-[#2997ff]">
+              Kanvas Tamu
+            </span>
+            <h3 className="font-heading font-semibold text-xl sm:text-2xl md:text-3xl text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">
+              Papan Stiker Interaktif.
+            </h3>
+            <p className="text-xs sm:text-sm text-[#86868b] mt-1">
+              Pilih simbol lalu klik di dalam kanvas untuk meninggalkan jejak interaktif Anda.
             </p>
           </div>
 
           {/* Controls */}
           <div className="flex items-center gap-2">
-            <div className="flex flex-wrap items-center gap-1 bg-white dark:bg-[#1A1A28] neo-border p-1.5 rounded-2xl shadow-neo">
+            <div className="flex items-center gap-1 p-1 rounded-xl border border-black/[0.05] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.04]">
               {stickerIcons.map((Icon, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveIconIndex(idx)}
-                  className={`w-9 h-9 rounded-xl flex items-center justify-center transition-transform ${
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all cursor-pointer ${
                     activeIconIndex === idx
-                      ? "bg-[#FF5A5F] text-white scale-110 neo-border-sm"
-                      : "hover:bg-gray-100 text-[#111111]"
+                      ? "bg-white text-[#1d1d1f] dark:bg-[#2c2c2e] dark:text-[#f5f5f7] shadow-xs"
+                      : "text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
                   }`}
+                  aria-label={`Stamp Icon ${idx}`}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4" />
                 </button>
               ))}
             </div>
 
-            <button
-              onClick={clearStickers}
-              className="bg-[#111111] text-white neo-btn p-3 rounded-2xl font-heading font-bold text-xs flex items-center gap-1 cursor-pointer"
-              title="Clear Canvas"
-            >
-              <Trash2 className="w-4 h-4 text-[#FF5A5F]" />
-            </button>
+            {stickers.length > 0 && (
+              <button
+                onClick={clearStickers}
+                className="p-2 rounded-xl border border-black/[0.05] dark:border-white/[0.08] text-[#86868b] hover:text-red-500 transition-colors cursor-pointer"
+                title="Bersihkan Kanvas"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Interactive Click Stamp Canvas Box */}
+        {/* Click Stamp Canvas Surface */}
         <div
           onClick={addSticker}
-          className="relative min-h-[220px] bg-white dark:bg-[#1A1A28] neo-border rounded-2xl p-4 overflow-hidden cursor-crosshair shadow-neo flex items-center justify-center select-none"
+          className="relative min-h-[220px] sm:min-h-[260px] bg-technical-grid rounded-2xl mt-6 p-4 overflow-hidden cursor-crosshair border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-center select-none"
         >
           {stickers.length === 0 && (
-            <div className="text-center font-heading font-extrabold text-sm sm:text-base text-gray-400 pointer-events-none">
-              ✨ KLIK DI SINI UNTUK MENEMPELKAN STIKER INTERAKTIF ✨
+            <div className="text-center font-mono text-xs text-[#94A3B8] dark:text-[#64748B] pointer-events-none">
+              [ Klik di mana saja untuk menempelkan simbol ]
             </div>
           )}
 
           <AnimatePresence>
-            {stickers.map((st) => {
-              const Icon = stickerIcons[st.iconIndex];
+            {stickers.map((sticker) => {
+              const Icon = stickerIcons[sticker.iconIndex];
               return (
                 <motion.div
-                  key={st.id}
-                  initial={{ scale: 0, rotate: st.rotation }}
-                  animate={{ scale: 1, rotate: st.rotation }}
-                  exit={{ scale: 0 }}
+                  key={sticker.id}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="absolute p-2.5 rounded-xl border border-black/[0.1] dark:border-white/[0.15] bg-white dark:bg-[#1A1E26] shadow-sm pointer-events-none"
                   style={{
-                    position: "absolute",
-                    left: st.x - 24,
-                    top: st.y - 24,
-                    backgroundColor: st.color,
+                    left: sticker.x - 20,
+                    top: sticker.y - 20,
+                    rotate: `${sticker.rotation}deg`,
                   }}
-                  className="w-12 h-12 neo-border rounded-2xl flex items-center justify-center shadow-neo pointer-events-none text-[#111111]"
                 >
-                  <Icon className="w-7 h-7" />
+                  <Icon className="w-5 h-5" style={{ color: sticker.color }} />
                 </motion.div>
               );
             })}
           </AnimatePresence>
         </div>
-
       </div>
     </section>
   );

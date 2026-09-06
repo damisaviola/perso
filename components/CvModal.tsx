@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Download, FileText, Mail, MapPin } from "lucide-react";
+import { X, Mail, MapPin } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/lib/data";
 
 interface CvModalProps {
@@ -10,74 +10,50 @@ interface CvModalProps {
 }
 
 export default function CvModal({ isOpen, onClose }: CvModalProps) {
-  const handleDownload = () => {
-    const element = document.createElement("a");
-    const file = new Blob([
-      `DAMIANUS SAVIOLA MATURBONGS - CURRICULUM VITAE
-Role: Creative Frontend Developer & UI Engineer
-Experience: ${PORTFOLIO_DATA.personal.experienceYears}
-Email: ${PORTFOLIO_DATA.personal.email}
-
-SUMMARY:
-${PORTFOLIO_DATA.personal.bio}
-
-SKILLS:
-- ${PORTFOLIO_DATA.skills.map(s => s.name).join(", ")}
-
-EXPERIENCE:
-${PORTFOLIO_DATA.experiences.map(e => `${e.role} at ${e.company} (${e.period})`).join("\n")}
-    `], { type: 'text/plain' });
-
-    element.href = URL.createObjectURL(file);
-    element.download = "Damianus_Saviola_Maturbongs_CV.txt";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-xs">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/40 backdrop-blur-xl">
           <div className="fixed inset-0" onClick={onClose} />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.97, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative z-10 w-full max-w-2xl neo-card bg-white dark:bg-[#1A1A28] rounded-3xl p-5 sm:p-8 shadow-neo-xl overflow-hidden my-4 sm:my-8"
+            exit={{ opacity: 0, scale: 0.97, y: 10 }}
+            transition={{ duration: 0.2 }}
+            className="relative z-10 w-full max-w-2xl bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 sm:p-8 shadow-2xl border border-black/[0.06] dark:border-white/[0.08] overflow-hidden my-4"
           >
             {/* Header */}
-            <div className="flex items-center justify-between pb-3.5 border-b-3 border-[#111111] dark:border-white mb-5">
-              <div className="flex items-center gap-2">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#FFD60A] neo-border rounded-xl flex items-center justify-center text-[#111111] shrink-0">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <h2 className="font-heading font-black text-xl sm:text-2xl text-[#111111] dark:text-white uppercase">
-                  CURRICULUM VITAE
+            <div className="flex items-center justify-between pb-4 border-b border-black/[0.05] dark:border-white/[0.06] mb-5">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+                  Dokumen
+                </span>
+                <h2 className="font-heading font-bold text-xl sm:text-2xl text-[#1d1d1f] dark:text-[#f5f5f7]">
+                  Curriculum Vitae.
                 </h2>
               </div>
 
               <button
                 onClick={onClose}
-                className="w-9 h-9 sm:w-10 sm:h-10 bg-[#FF5A5F] text-white neo-btn rounded-xl flex items-center justify-center cursor-pointer"
+                className="w-7 h-7 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close"
               >
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
 
             {/* CV Content Preview */}
-            <div className="space-y-5 max-h-[58vh] overflow-y-auto pr-1">
+            <div className="space-y-5 max-h-[55vh] overflow-y-auto pr-2 scrollbar-hide">
               {/* Header info */}
-              <div className="bg-[#FFF9F0] dark:bg-[#111111] neo-border p-4 rounded-2xl space-y-2">
-                <h3 className="font-heading font-black text-lg sm:text-xl text-[#111111] dark:text-white">
+              <div className="p-4 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.06] space-y-1">
+                <h3 className="font-heading font-semibold text-base sm:text-lg text-[#1d1d1f] dark:text-[#f5f5f7]">
                   {PORTFOLIO_DATA.personal.name}
                 </h3>
-                <p className="text-xs sm:text-sm font-bold text-[#FF5A5F]">
-                  Creative Frontend Developer • UI Engineer
+                <p className="text-xs text-[#0071e3] dark:text-[#2997ff] font-medium">
+                  Web Developer
                 </p>
-                <div className="flex flex-wrap gap-3 text-xs font-bold text-gray-700 dark:text-gray-300 pt-1">
+                <div className="flex flex-wrap gap-3 text-xs text-[#86868b] pt-1">
                   <span className="flex items-center gap-1">
                     <Mail className="w-3.5 h-3.5" />
                     {PORTFOLIO_DATA.personal.email}
@@ -91,16 +67,16 @@ ${PORTFOLIO_DATA.experiences.map(e => `${e.role} at ${e.company} (${e.period})`)
 
               {/* Work history summary */}
               <div className="space-y-3">
-                <h4 className="font-heading font-black text-xs sm:text-sm text-[#111111] dark:text-white uppercase">
-                  PENGALAMAN KERJA UTAMA
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">
+                  Riwayat Pengalaman
                 </h4>
                 {PORTFOLIO_DATA.experiences.map((exp) => (
-                  <div key={exp.id} className="border-l-3 border-[#FFD60A] pl-3 py-1 space-y-1">
-                    <div className="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm font-heading font-bold text-[#111111] dark:text-white">
+                  <div key={exp.id} className="border-l-2 border-[#0071e3] dark:border-[#2997ff] pl-3 py-0.5 space-y-1">
+                    <div className="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">
                       <span>{exp.role} — {exp.company}</span>
-                      <span className="text-[11px] text-gray-500">{exp.period}</span>
+                      <span className="text-xs text-[#86868b]">{exp.period}</span>
                     </div>
-                    <p className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                    <p className="text-xs text-[#86868b] leading-relaxed">
                       {exp.description}
                     </p>
                   </div>
@@ -109,32 +85,14 @@ ${PORTFOLIO_DATA.experiences.map(e => `${e.role} at ${e.company} (${e.period})`)
 
               {/* Education & Certification */}
               <div className="space-y-2">
-                <h4 className="font-heading font-black text-xs sm:text-sm text-[#111111] dark:text-white uppercase">
-                  PENDIDIKAN & SERTIFIKASI
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">
+                  Pendidikan
                 </h4>
-                <div className="bg-white dark:bg-[#111111] neo-border-sm p-3 rounded-xl text-xs font-bold text-gray-800 dark:text-gray-200">
-                  🎓 Universitas Amikom Yogyakarta (2022 - 2026)
-                  <span className="block mt-1 font-medium text-gray-600 dark:text-gray-400">S1 Sistem Informasi (Digital Bisnis) - IPK 3.88/4.00</span>
-                </div>
-                <div className="bg-white dark:bg-[#111111] neo-border-sm p-3 rounded-xl text-xs font-bold text-gray-800 dark:text-gray-200">
-                  📜 Sertifikasi Pelatihan Frontend Web Development (Internal)
+                <div className="p-3.5 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.06] text-xs text-[#1d1d1f] dark:text-[#f5f5f7]">
+                  <span className="font-semibold">Universitas Amikom Yogyakarta (2022 — 2026)</span>
+                  <span className="block mt-0.5 text-[#86868b]">S1 Sistem Informasi (Digital Bisnis) — IPK 3.88/4.00</span>
                 </div>
               </div>
-            </div>
-
-            {/* Footer download action */}
-            <div className="pt-5 border-t-3 border-[#111111] dark:border-white mt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <span className="text-[11px] font-bold text-gray-500">
-                Format file: TXT / PDF Ready
-              </span>
-
-              <button
-                onClick={handleDownload}
-                className="w-full sm:w-auto bg-[#3B82F6] text-white neo-btn px-5 py-2.5 rounded-2xl font-heading font-black text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>DOWNLOAD RESUME (CV)</span>
-              </button>
             </div>
           </motion.div>
         </div>

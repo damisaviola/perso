@@ -1,181 +1,155 @@
 "use client";
 
 import {
-  User,
-  Heart,
-  Target,
-  Sparkles,
-  Coffee,
+  Film,
   Gamepad2,
-  Music,
-  Briefcase,
+  BookOpen,
   Code2,
-  CheckCircle,
+  Globe,
+  Database,
+  Terminal,
 } from "lucide-react";
-import { PORTFOLIO_DATA } from "@/lib/data";
 
 export default function AboutSection() {
-  const hobbies = [
-    { name: "Membaca Komik", icon: Sparkles, color: "#FFD60A" },
-    { name: "Menonton Film", icon: Target, color: "#EC4899" },
-    { name: "Bermain Game", icon: Gamepad2, color: "#3B82F6" },
-    { name: "Web Dev Communities", icon: Code2, color: "#FF9F1C" },
-    { name: "UI/UX Exploration", icon: User, color: "#8B5CF6" },
+  const interests = [
+    { label: "Film & Sinema", desc: "Mencatat review dan daftar tontonan di Letterboxd.", icon: Film },
+    { label: "Membaca Komik", desc: "Menikmati seni visual dan cerita bergambar.", icon: BookOpen },
+    { label: "Video Game", desc: "Mengapresiasi desain game dan alur cerita interaktif.", icon: Gamepad2 },
+    { label: "Eksplorasi Web", desc: "Mengulik teknologi baru dan membuat eksperimen kode.", icon: Code2 },
+  ];
+
+  const tools = [
+    {
+      category: "Frontend",
+      icon: Globe,
+      items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5 & CSS3"],
+    },
+    {
+      category: "Backend & Basis Data",
+      icon: Database,
+      items: ["PHP", "Laravel", "CodeIgniter", "Go (Golang)", "MySQL", "PostgreSQL", "Supabase"],
+    },
+    {
+      category: "Alat & Alur Kerja",
+      icon: Terminal,
+      items: ["Git & GitHub", "VS Code", "Postman", "Figma", "REST API"],
+    },
   ];
 
   return (
-    <section id="about" className="py-12 sm:py-24 px-3 sm:px-8 relative bg-neo-grid">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]">
+      <div className="max-w-5xl mx-auto">
         
-        {/* Section Header */}
-        <div className="flex flex-col items-start gap-2 mb-8 sm:mb-12">
-          <div className="bg-[#FF5A5F] text-white neo-border px-3.5 py-1 rounded-full font-heading font-black text-xs sm:text-sm uppercase shadow-neo flex items-center gap-1.5">
-            <User className="w-4 h-4" />
-            <span>WHO I AM</span>
+        {/* Apple Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.05] dark:border-white/[0.06]">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
+              Profil
+            </span>
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] dark:text-[#f5f5f7] mt-1">
+              Tentang Dami.
+            </h2>
           </div>
-
-          <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl tracking-tight uppercase text-[#111111] dark:text-white">
-            ABOUT <span className="bg-[#FFD60A] text-[#111111] px-2.5 py-0.5 neo-border shadow-neo inline-block rotate-1">MYSELF</span>
-          </h2>
+          <p className="text-xs sm:text-sm text-[#86868b] max-w-sm">
+            Menyukai dunia pembuatan website, bercerita lewat tulisan, dan menikmati waktu luang bersama film.
+          </p>
         </div>
 
-        {/* Grid Layout of Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 xl:gap-8">
+        {/* Apple Bento Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 pt-6 sm:pt-10">
           
-          {/* Card 1: Main Bio (Large Span 8) */}
-          <div className="lg:col-span-8 bg-white dark:bg-[#1A1A28] neo-card neo-card-hover p-5 sm:p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden">
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFD60A] neo-border rounded-2xl flex items-center justify-center text-[#111111] shrink-0">
-                  <User className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <div>
-                  <h3 className="font-heading font-black text-xl sm:text-3xl text-[#111111] dark:text-white">
-                    Hi, I'm Damianus Saviola! 👋
-                  </h3>
-                  <p className="text-xs sm:text-sm font-bold text-[#FF5A5F]">
-                    Web Developers
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-sm sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
-                Sebagai Web Developer, spesialisasi saya ada pada pengembangan antarmuka (frontend) dan sistem full-stack menggunakan ekosistem Next.js, Laravel, dan CodeIgniter.
-              </p>
-
-              <p className="text-sm sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
-                Keahlian utama yang selalu saya kembangkan dan aplikasikan dalam berbagai proyek meliputi:
-              </p>
-            </div>
-
-            {/* Highlights List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-4 sm:pt-6 border-t-3 border-[#111111] dark:border-white mt-5">
-              <div className="flex items-center gap-2 font-heading font-bold text-xs sm:text-base text-[#111111] dark:text-white">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#22C55E] shrink-0" />
-                <span>Frontend: React, Next.js, Tailwind</span>
-              </div>
-              <div className="flex items-center gap-2 font-heading font-bold text-xs sm:text-base text-[#111111] dark:text-white">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#3B82F6] shrink-0" />
-                <span>Backend: PHP (Laravel, CI), Go</span>
-              </div>
-              <div className="flex items-center gap-2 font-heading font-bold text-xs sm:text-base text-[#111111] dark:text-white">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#EC4899] shrink-0" />
-                <span>Database: MySQL, Supabase, Firebase</span>
-              </div>
-              <div className="flex items-center gap-2 font-heading font-bold text-xs sm:text-base text-[#111111] dark:text-white">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF9F1C] shrink-0" />
-                <span>Metodologi: Clean Code, Kolaborasi</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Career Goals & Philosophy (Span 4) */}
-          <div className="lg:col-span-4 bg-[#8B5CF6] text-white neo-card neo-card-hover p-5 sm:p-8 rounded-3xl flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FFD60A] text-[#111111] neo-border rounded-2xl flex items-center justify-center">
-                <Target className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-
-              <h3 className="font-heading font-black text-xl sm:text-3xl">
-                TECH STACK INTI
+          {/* Main Personal Story (Span 7) */}
+          <div className="lg:col-span-7 apple-card p-5 sm:p-8 rounded-2xl sm:rounded-3xl space-y-4 flex flex-col justify-between">
+            <div className="space-y-3 sm:space-y-4">
+              <h3 className="font-heading font-semibold text-lg sm:text-xl md:text-2xl text-[#1d1d1f] dark:text-[#f5f5f7]">
+                Halo! Saya Damianus Saviola Maturbongs.
               </h3>
-
-              <ul className="text-xs sm:text-sm leading-relaxed font-medium text-purple-100 space-y-2">
-                <li><strong className="text-[#FFD60A]">Frontend:</strong> HTML, CSS, JavaScript (React, Next.js, Tailwind CSS, Bootstrap).</li>
-                <li><strong className="text-[#FFD60A]">Backend:</strong> PHP (Laravel, CodeIgniter), Golang, RESTful API.</li>
-                <li><strong className="text-[#FFD60A]">Database:</strong> MySQL (Normalisasi, Query Optimization), Firebase, Supabase.</li>
-                <li><strong className="text-[#FFD60A]">Metodologi:</strong> Clean Code, SDLC, Git Version Control.</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Card 3: Experience Snapshot (Span 5) */}
-          <div className="lg:col-span-5 bg-[#3B82F6] text-white neo-card neo-card-hover p-5 sm:p-8 rounded-3xl flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-[#111111] text-[#3B82F6] neo-border rounded-2xl flex items-center justify-center font-black">
-                <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-
-              <h3 className="font-heading font-black text-xl sm:text-3xl">
-                QUICK STATS & TRACK RECORD
-              </h3>
-
-              <ul className="space-y-2.5 font-heading font-bold text-xs sm:text-base">
-                <li className="bg-white/10 neo-border p-2.5 sm:p-3 rounded-xl flex items-center justify-between">
-                  <span>Proyek Selesai:</span>
-                  <span className="bg-[#FFD60A] text-[#111111] px-2 py-0.5 rounded-lg neo-border-sm">
-                    {PORTFOLIO_DATA.personal.completedProjects}
-                  </span>
-                </li>
-
-                <li className="bg-white/10 neo-border p-2.5 sm:p-3 rounded-xl flex items-center justify-between">
-                  <span>Kepuasan Klien:</span>
-                  <span className="bg-[#22C55E] text-[#111111] px-2 py-0.5 rounded-lg neo-border-sm">
-                    {PORTFOLIO_DATA.personal.happyClients}
-                  </span>
-                </li>
-
-                <li className="bg-white/10 neo-border p-2.5 sm:p-3 rounded-xl flex items-center justify-between">
-                  <span>Pengalaman Industri:</span>
-                  <span className="bg-[#EC4899] text-white px-2 py-0.5 rounded-lg neo-border-sm">
-                    {PORTFOLIO_DATA.personal.experienceYears}
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Card 4: Hobbies & Passions (Span 7) */}
-          <div className="lg:col-span-7 bg-[#FFD60A] text-[#111111] neo-card neo-card-hover p-5 sm:p-8 rounded-3xl flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FF5A5F] text-white neo-border rounded-2xl flex items-center justify-center shrink-0">
-                  <Heart className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <h3 className="font-heading font-black text-xl sm:text-3xl uppercase">
-                  MARI TERKONEKSI
-                </h3>
-              </div>
-
-              <p className="text-xs sm:text-base font-semibold">
-                Saya selalu terbuka untuk kolaborasi, diskusi proyek, atau peluang profesional. Selain itu, saya juga menikmati:
+              
+              <p className="text-xs sm:text-sm md:text-base text-[#86868b] leading-relaxed font-normal">
+                Saya tinggal di Yogyakarta dan menyelesaikan studi S1 Sistem Informasi (Digital Bisnis) di Universitas Amikom Yogyakarta. Ketertarikan saya pada dunia web bermula dari rasa ingin tahu bagaimana kode-kode di editor bisa mewujud menjadi halaman interaktif yang dinikmati orang banyak.
               </p>
 
-              <div className="flex flex-wrap gap-2.5 pt-1">
-                {hobbies.map((hobby) => {
-                  const Icon = hobby.icon;
-                  return (
-                    <div
-                      key={hobby.name}
-                      className="bg-white dark:bg-[#111111] dark:text-white neo-border px-3 py-1.5 rounded-xl font-heading font-bold text-xs sm:text-sm flex items-center gap-2 shadow-neo hover:scale-105 transition-transform"
-                    >
-                      <Icon className="w-3.5 h-3.5 text-[#FF5A5F]" />
-                      <span>{hobby.name}</span>
+              <p className="text-xs sm:text-sm md:text-base text-[#86868b] leading-relaxed font-normal">
+                Saya suka membuat website yang terasa ringan, punya tampilan rapi, dan mudah dipakai. Baik itu merancang tampilan antarmuka dengan React/Next.js, mengatur struktur database MySQL, maupun menyusun logika aplikasi dengan Laravel dan PHP.
+              </p>
+            </div>
+
+            <div className="pt-4 sm:pt-5 border-t border-black/[0.05] dark:border-white/[0.06] flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-[#86868b]">
+              <span>📍 Yogyakarta, Indonesia</span>
+              <span className="hidden sm:inline">•</span>
+              <span>🎓 Amikom Yogyakarta</span>
+            </div>
+          </div>
+
+          {/* Tools & Technologies (Span 5) */}
+          <div className="lg:col-span-5 apple-card p-5 sm:p-8 rounded-2xl sm:rounded-3xl space-y-4 sm:space-y-5">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">
+                Ekosistem
+              </span>
+              <h3 className="font-heading font-semibold text-base sm:text-lg text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">
+                Alat yang Digunakan
+              </h3>
+            </div>
+
+            <div className="space-y-3 sm:space-y-4">
+              {tools.map((t) => {
+                const Icon = t.icon;
+                return (
+                  <div key={t.category} className="space-y-1.5 sm:space-y-2">
+                    <div className="flex items-center gap-1.5 text-xs font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">
+                      <Icon className="w-3.5 h-3.5 text-[#0071e3] dark:text-[#2997ff]" />
+                      <span>{t.category}</span>
                     </div>
-                  );
-                })}
-              </div>
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                      {t.items.map((item) => (
+                        <span
+                          key={item}
+                          className="text-[11px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] text-[#86868b]"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Leisure (Span 12) */}
+          <div className="lg:col-span-12 apple-card p-5 sm:p-8 rounded-2xl sm:rounded-3xl">
+            <div className="pb-3 sm:pb-4 border-b border-black/[0.05] dark:border-white/[0.06]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">
+                Di Luar Koding
+              </span>
+              <h3 className="font-heading font-semibold text-base sm:text-lg text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">
+                Kegemaran & Waktu Luang
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-4 sm:pt-5">
+              {interests.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.05] flex items-start gap-3"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-[#0071e3]/10 text-[#0071e3] dark:text-[#2997ff] flex items-center justify-center shrink-0">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">
+                        {item.label}
+                      </h4>
+                      <p className="text-[11px] sm:text-xs text-[#86868b] mt-0.5 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

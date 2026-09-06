@@ -20,15 +20,12 @@ async function sendDiscordAlert(webhookUrl: string, info: {
         embeds: [
           {
             title: "🌐 Pengunjung Baru Terdeteksi",
-            color: 2725887, // Apple Blue (#2997FF)
             fields: [
               { name: "Alamat IP", value: `\`${info.ip}\``, inline: true },
               { name: "Lokasi", value: locationText, inline: true },
               { name: "Halaman", value: `\`${info.path}\``, inline: false },
               { name: "Perangkat / Browser", value: info.userAgent, inline: false },
             ],
-            footer: { text: "Portofolio Damianus Saviola • Visitor Monitor" },
-            timestamp: info.time,
           },
         ],
       }),
@@ -111,11 +108,12 @@ export const config = {
   matcher: [
     /*
      * Mengecualikan:
+     * - api (route handler internal seperti /api/projects, /api/letterboxd)
      * - _next/static (file statis bundler)
      * - _next/image (optimasi gambar Next.js)
      * - favicon.ico, robots.txt, sitemap.xml
      * - ekstensi file gambar dan dokumen umum
      */
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)$).*)",
   ],
 };

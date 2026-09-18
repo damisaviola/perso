@@ -13,6 +13,7 @@ import ReactLogo from "../assets/logo/reactjs.webp";
 import SupabaseLogo from "../assets/logo/supabase.webp";
 import TSLogo from "../assets/logo/typescript.webp";
 import VueLogo from "../assets/logo/vuejs.webp";
+import MimikaCenterLogo from "../assets/logo/mimika_center.jpg";
 import { StaticImageData } from "next/image";
 
 export interface Project {
@@ -52,7 +53,7 @@ export interface ExperienceItem {
   techStack: string[];
   color: string;
   iconName: string;
-  logo?: string;
+  logo?: string | StaticImageData;
 }
 
 export interface ServiceItem {
@@ -209,6 +210,23 @@ export const PORTFOLIO_DATA = {
   ] as Project[],
 
   experiences: [
+    {
+      id: "exp-mimika",
+      company: "Mimika Center",
+      role: "Frontend Web Developer",
+      period: "2024",
+      description: "Berkontribusi dalam pengembangan dan implementasi website Lapor Masyarakat, sebuah platform digital untuk memfasilitasi pengaduan, aspirasi, dan komunikasi interaktif antara warga dengan Mimika Center.",
+      achievements: [
+        "Merancang dan membangun antarmuka website Lapor Masyarakat berbasis Single Page Application (SPA) menggunakan Angular dan TypeScript.",
+        "Mengembangkan fitur formulir aduan masyarakat interaktif dengan validasi multi-langkah, upload berkas/foto bukti lampiran, serta pelacakan status penanganan laporan secara transparan.",
+        "Mengintegrasikan RESTful API untuk sinkronisasi data laporan masyarakat serta pembaruan status tindak lanjut penanganan aduan secara real-time.",
+        "Mengoptimalkan performa rendering halaman serta memastikan tata letak responsif dan ramah pengguna (usability) di berbagai perangkat.",
+      ],
+      techStack: ["Angular", "TypeScript", "REST API", "Tailwind CSS", "RxJS", "HTML5"],
+      color: "#8B1E2D",
+      iconName: "Globe",
+      logo: MimikaCenterLogo,
+    },
     {
       id: "exp-amcc",
       company: "Amikom Computer Club (AMCC)",

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { PORTFOLIO_DATA, ExperienceItem } from "@/lib/data";
 
 export default function ExperienceSection() {
@@ -34,8 +35,14 @@ export default function ExperienceSection() {
                 <div className="lg:col-span-4 space-y-2">
                   <div className="flex items-center gap-3">
                     {exp.logo && (
-                      <div className="w-10 h-10 rounded-xl border border-black/[0.06] dark:border-white/[0.08] bg-white p-1 flex items-center justify-center shrink-0">
-                        <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
+                      <div className="w-10 h-10 rounded-xl border border-black/[0.06] dark:border-white/[0.08] bg-white p-1 flex items-center justify-center shrink-0 overflow-hidden">
+                        <Image
+                          src={exp.logo}
+                          alt={exp.company}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-contain rounded-lg"
+                        />
                       </div>
                     )}
                     <div>

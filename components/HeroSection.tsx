@@ -76,10 +76,6 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
                 Damianus Saviola.
               </h1>
 
-              <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[#86868b] max-w-2xl leading-relaxed font-normal">
-                Menciptakan ruang digital yang tenang, rapi, dan menyenangkan untuk dijelajahi. Menaruh perhatian pada kejelasan tipografi, rasa nyaman saat berinteraksi, serta kesederhanaan visual.
-              </p>
-
               {/* Action Controls */}
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-6 sm:pt-8">
                 <a

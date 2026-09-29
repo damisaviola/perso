@@ -52,35 +52,29 @@ export default function ContactSection() {
     <section id="contact" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]">
       <div className="max-w-5xl mx-auto">
 
-        {/* Apple Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.05] dark:border-white/[0.06]">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <span className="text-xs sm:text-[13px] font-medium text-[#0071e3] dark:text-[#2997ff]">
-              Kontak
-            </span>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] dark:text-[#f5f5f7] mt-1">
-              Mari Terhubung.
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Mari Terhubung
             </h2>
+            <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5 max-w-md">
+              Punya ide proyek, pertanyaan seputar web development, atau tawaran kolaborasi? Silakan kirim pesan.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-[#86868b] max-w-sm">
-            Punya ide proyek, pertanyaan seputar web, atau sekadar ingin menyapa? Silakan hubungi saya.
-          </p>
         </div>
 
-        {/* Unboxed 2-Column Editorial Layout */}
+        {/* 2-Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pt-8 sm:pt-12 items-start">
 
           {/* Left Column: Direct Communication (Span 5) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-3">
-              <span className="text-xs font-medium text-[#0071e3] dark:text-[#2997ff]">
-                Kanal Langsung
-              </span>
-              <h3 className="font-heading font-semibold text-xl sm:text-2xl text-[#1d1d1f] dark:text-[#f5f5f7]">
-                Sapa & Ngobrol.
+            <div className="space-y-2">
+              <h3 className="font-heading font-semibold text-xl sm:text-2xl text-[#0f172a] dark:text-[#f8fafc]">
+                Sapa & Diskusi
               </h3>
-              <p className="text-xs sm:text-sm text-[#86868b] leading-relaxed">
-                Saya selalu terbuka untuk diskusi santai, kolaborasi pembuatan website, atau sekadar bertukar rekomendasi film dan komik.
+              <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] leading-relaxed">
+                Saya selalu terbuka untuk kolaborasi pembuatan website, konsultasi frontend, atau sekadar bertukar rekomendasi film dan komik.
               </p>
             </div>
 
@@ -160,12 +154,12 @@ export default function ContactSection() {
                       placeholder="Nama Anda"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.03] text-base sm:text-sm text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.03] text-base sm:text-sm text-[#0f172a] dark:text-[#f8fafc] placeholder:text-[#64748b] focus:outline-none focus:border-[#2563eb] dark:focus:border-[#60a5fa] focus:ring-1 focus:ring-[#2563eb] dark:focus:ring-[#60a5fa] transition-colors"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-[#86868b] block">
+                    <label className="text-xs font-medium text-[#64748b] dark:text-[#94a3b8] block">
                       Email
                     </label>
                     <input
@@ -174,13 +168,13 @@ export default function ContactSection() {
                       placeholder="email@anda.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.03] text-base sm:text-sm text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.03] text-base sm:text-sm text-[#0f172a] dark:text-[#f8fafc] placeholder:text-[#64748b] focus:outline-none focus:border-[#2563eb] dark:focus:border-[#60a5fa] focus:ring-1 focus:ring-[#2563eb] dark:focus:ring-[#60a5fa] transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-[#86868b] block">
+                  <label className="text-xs font-medium text-[#64748b] dark:text-[#94a3b8] block">
                     Pesan
                   </label>
                   <textarea
@@ -189,13 +183,13 @@ export default function ContactSection() {
                     placeholder="Tuliskan pesan atau ide Anda di sini..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.03] text-base sm:text-sm text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition-colors leading-relaxed"
+                    className="w-full px-4 py-2.5 rounded-xl border border-black/[0.08] dark:border-white/[0.1] bg-black/[0.02] dark:bg-white/[0.03] text-base sm:text-sm text-[#0f172a] dark:text-[#f8fafc] placeholder:text-[#64748b] focus:outline-none focus:border-[#2563eb] dark:focus:border-[#60a5fa] focus:ring-1 focus:ring-[#2563eb] dark:focus:ring-[#60a5fa] transition-colors leading-relaxed"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#0071e3] text-white text-xs sm:text-sm font-medium hover:bg-[#0077ed] transition-colors cursor-pointer active:scale-98"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white dark:bg-[#f8fafc] dark:hover:bg-[#e2e8f0] dark:text-[#0f172a] text-xs sm:text-sm font-medium transition-all shadow-xs cursor-pointer active:scale-98"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Kirim Pesan</span>

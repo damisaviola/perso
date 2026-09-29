@@ -24,19 +24,16 @@ export default function CvModal({ isOpen, onClose }: CvModalProps) {
             className="relative z-10 w-full max-w-2xl bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 sm:p-8 shadow-2xl border border-black/[0.06] dark:border-white/[0.08] overflow-hidden my-4"
           >
             {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-black/[0.05] dark:border-white/[0.06] mb-5">
+            <div className="flex items-center justify-between pb-4 border-b border-black/[0.06] dark:border-white/[0.08] mb-5">
               <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff]">
-                  Dokumen
-                </span>
-                <h2 className="font-heading font-bold text-xl sm:text-2xl text-[#1d1d1f] dark:text-[#f5f5f7]">
-                  Curriculum Vitae.
+                <h2 className="font-heading font-bold text-xl sm:text-2xl text-[#0f172a] dark:text-[#f8fafc]">
+                  Curriculum Vitae
                 </h2>
               </div>
 
               <button
                 onClick={onClose}
-                className="w-7 h-7 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] flex items-center justify-center transition-colors cursor-pointer"
+                className="w-7 h-7 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc] flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X className="w-3.5 h-3.5" />

@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-space-grotesk), sans-serif;
-    --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-plus-jakarta), sans-serif;
-    --bg-canvas: #f5f5f7;
+    --font-heading: var(--font-space-grotesk), system-ui, sans-serif;
+    --font-body: var(--font-plus-jakarta), system-ui, sans-serif;
+    --bg-canvas: #fafafa;
     --bg-surface: #ffffff;
-    --fg-primary: #1d1d1f;
-    --fg-secondary: #86868b;
-    --border-subtle: rgba(0, 0, 0, 0.07);
-    --accent-apple: #0071e3;
+    --fg-primary: #0f172a;
+    --fg-secondary: #64748b;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --accent: #2563eb;
   }
 
   .dark {
-    --bg-canvas: #000000;
-    --bg-surface: #161617;
-    --fg-primary: #f5f5f7;
-    --fg-secondary: #86868b;
+    --bg-canvas: #090d16;
+    --bg-surface: #0f172a;
+    --fg-primary: #f8fafc;
+    --fg-secondary: #94a3b8;
     --border-subtle: rgba(255, 255, 255, 0.08);
-    --accent-apple: #2997ff;
+    --accent: #3b82f6;
   }
 }
 
@@ -40,69 +40,62 @@ h5,
 h6,
 .font-heading {
   font-family: var(--font-heading);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
-/* Premium Apple Card Surface */
-.apple-card,
+/* Tactile Surface Cards */
 .surface-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: 1.25rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 4px 16px -2px rgba(0, 0, 0, 0.03);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .apple-card,
-.dark .surface-card {
-  background-color: #161617;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 8px 24px -4px rgba(0, 0, 0, 0.4);
-}
-
-.apple-card:hover,
 .surface-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.07);
+  border-color: rgba(15, 23, 42, 0.16);
 }
 
-.dark .apple-card:hover,
 .dark .surface-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 30px -6px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
-/* Apple Buttons */
-.apple-btn-primary {
-  background-color: var(--accent-apple);
+/* Button Primitives */
+.btn-primary {
+  background-color: #0f172a;
   color: #ffffff;
   border-radius: 9999px;
   font-weight: 500;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.apple-btn-primary:hover {
-  opacity: 0.94;
-  transform: scale(1.01);
+.dark .btn-primary {
+  background-color: #f8fafc;
+  color: #0f172a;
 }
 
-.apple-btn-secondary {
-  background-color: rgba(0, 0, 0, 0.04);
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: rgba(15, 23, 42, 0.04);
   color: var(--fg-primary);
+  border: 1px solid var(--border-subtle);
   border-radius: 9999px;
   font-weight: 500;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .apple-btn-secondary {
-  background-color: rgba(255, 255, 255, 0.08);
+.dark .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
-.apple-btn-secondary:hover {
-  background-color: rgba(0, 0, 0, 0.07);
+.btn-secondary:hover {
+  background-color: rgba(15, 23, 42, 0.08);
 }
 
-.dark .apple-btn-secondary:hover {
+.dark .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.12);
 }
 

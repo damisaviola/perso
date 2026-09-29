@@ -39,10 +39,10 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative overflow-x-hidden">
-      {/* Sticky Apple Header Navbar */}
+      {/* Sticky Header Navbar */}
       <Navbar activeMode={activeMode} onSelectMode={setActiveMode} />
 
-      {/* Hero Section with Dual Mode Apple Segmented Control */}
+      {/* Hero Section with Dual Mode Perspective Control */}
       <HeroSection activeMode={activeMode} onSelectMode={setActiveMode} />
 
       {/* Dual Mode Landing Page Content */}

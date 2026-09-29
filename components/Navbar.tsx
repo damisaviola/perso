@@ -32,32 +32,32 @@ export default function Navbar({ activeMode, onSelectMode }: NavbarProps) {
   const currentLinks = activeMode === "work" ? workLinks : hobbiesLinks;
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#f5f5f7]/85 dark:bg-[#000000]/85 border-b border-black/[0.06] dark:border-white/[0.08] transition-colors duration-200">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#fafafa]/90 dark:bg-[#090d16]/90 border-b border-black/[0.06] dark:border-white/[0.08] transition-colors duration-200">
       <nav className="max-w-5xl mx-auto px-4 sm:px-8 h-12 sm:h-14 flex items-center justify-between gap-3">
-        {/* Apple Brand Mark */}
+        {/* Brand Mark */}
         <a
           href="#hero"
           className="flex items-center group cursor-pointer shrink-0"
         >
-          <span className="font-heading font-semibold text-base sm:text-lg tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] group-hover:opacity-75 transition-opacity">
-            damisaviola<span className="text-[#0071e3] dark:text-[#2997ff]">.</span>
+          <span className="font-heading font-bold text-base sm:text-lg tracking-tight text-[#0f172a] dark:text-[#f8fafc] group-hover:opacity-80 transition-opacity">
+            damisaviola
           </span>
         </a>
 
-        {/* Center: Apple Segmented Pill Switcher */}
-        <div className="hidden sm:inline-flex p-0.5 rounded-full bg-black/[0.05] dark:bg-white/[0.08] border border-black/[0.04] dark:border-white/[0.06]">
+        {/* Center: Perspective Pill Switcher */}
+        <div className="hidden sm:inline-flex p-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08]">
           <button
             onClick={() => onSelectMode("work")}
-            className={`relative px-3 py-1 text-xs font-medium rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`relative px-3.5 py-1 text-xs font-medium rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
               activeMode === "work"
-                ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
-                : "text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
+                ? "text-[#0f172a] dark:text-[#f8fafc]"
+                : "text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc]"
             }`}
           >
             {activeMode === "work" && (
               <motion.div
                 layoutId="navSegmentedPill"
-                className="absolute inset-0 bg-white dark:bg-[#2c2c2e] rounded-full shadow-xs"
+                className="absolute inset-0 bg-white dark:bg-[#1e293b] rounded-full shadow-xs border border-black/[0.04] dark:border-white/[0.08]"
                 transition={{ type: "spring", stiffness: 450, damping: 35 }}
               />
             )}
@@ -67,16 +67,16 @@ export default function Navbar({ activeMode, onSelectMode }: NavbarProps) {
 
           <button
             onClick={() => onSelectMode("hobbies")}
-            className={`relative px-3 py-1 text-xs font-medium rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`relative px-3.5 py-1 text-xs font-medium rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
               activeMode === "hobbies"
-                ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
-                : "text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
+                ? "text-[#0f172a] dark:text-[#f8fafc]"
+                : "text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc]"
             }`}
           >
             {activeMode === "hobbies" && (
               <motion.div
                 layoutId="navSegmentedPill"
-                className="absolute inset-0 bg-white dark:bg-[#2c2c2e] rounded-full shadow-xs"
+                className="absolute inset-0 bg-white dark:bg-[#1e293b] rounded-full shadow-xs border border-black/[0.04] dark:border-white/[0.08]"
                 transition={{ type: "spring", stiffness: 450, damping: 35 }}
               />
             )}
@@ -100,7 +100,7 @@ export default function Navbar({ activeMode, onSelectMode }: NavbarProps) {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-[13px] text-[#1d1d1f]/70 dark:text-[#f5f5f7]/70 hover:text-[#0071e3] dark:hover:text-[#2997ff] transition-colors"
+                  className="text-[13px] text-[#64748b] dark:text-[#94a3b8] hover:text-[#0f172a] dark:hover:text-[#f8fafc] font-medium transition-colors"
                 >
                   {link.name}
                 </a>
@@ -117,7 +117,7 @@ export default function Navbar({ activeMode, onSelectMode }: NavbarProps) {
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 -mr-1 text-[#1d1d1f] dark:text-[#f5f5f7] hover:opacity-70 transition-opacity active:scale-95"
+            className="md:hidden p-2 -mr-1 text-[#0f172a] dark:text-[#f8fafc] hover:opacity-70 transition-opacity active:scale-95"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -137,7 +137,7 @@ export default function Navbar({ activeMode, onSelectMode }: NavbarProps) {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-b border-black/[0.06] dark:border-white/[0.08] bg-[#f5f5f7]/95 dark:bg-[#000000]/95 backdrop-blur-xl px-4 py-3"
+            className="md:hidden border-b border-black/[0.06] dark:border-white/[0.08] bg-[#fafafa]/95 dark:bg-[#090d16]/95 backdrop-blur-xl px-4 py-3"
           >
             {/* Mobile Mode Switcher */}
             <div className="flex p-1 mb-3 rounded-full bg-black/[0.05] dark:bg-white/[0.08] border border-black/[0.04] dark:border-white/[0.06]">

@@ -12,23 +12,20 @@ export default function ComicsSection() {
       className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]"
     >
       <div className="max-w-5xl mx-auto">
-        {/* Apple Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.05] dark:border-white/[0.06]">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <span className="text-xs sm:text-[13px] font-medium text-[#0071e3] dark:text-[#2997ff]">
-              Koleksi & Bacaan
-            </span>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] dark:text-[#f5f5f7] mt-1">
-              Top 10 Komik & Novel Grafis.
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Top 10 Komik & Novel Grafis
             </h2>
+            <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5 max-w-md">
+              Karya-karya berpengaruh yang membentuk kecintaan saya pada seni visual sekuensial dan penceritaan naratif.
+            </p>
           </div>
           <div className="flex flex-col sm:items-end gap-1">
-            <p className="text-xs sm:text-sm text-[#86868b] max-w-sm">
-              Sepuluh karya berpengaruh yang membentuk kecintaan saya pada seni visual sekuensial dan penulisan narasi mendalam.
-            </p>
-            <span className="text-xs font-medium text-[#86868b] flex items-center gap-1.5 mt-0.5">
-              <BookOpen className="w-3.5 h-3.5 text-[#0071e3] dark:text-[#2997ff]" />
-              <span>Pilihan Personal</span>
+            <span className="text-xs font-medium text-[#64748b] dark:text-[#94a3b8] flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-[#2563eb] dark:text-[#60a5fa]" />
+              <span>Kurasi Personal</span>
             </span>
           </div>
         </div>

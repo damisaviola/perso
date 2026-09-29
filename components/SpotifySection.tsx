@@ -7,25 +7,22 @@ export default function SpotifySection() {
     <section id="spotify" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]">
       <div className="max-w-5xl mx-auto">
         
-        {/* Apple Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.05] dark:border-white/[0.06]">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <span className="text-xs sm:text-[13px] font-medium text-[#0071e3] dark:text-[#2997ff]">
-              Spotify Playlist
-            </span>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] dark:text-[#f5f5f7] mt-1">
-              Kurasi Musik.
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Kurasi Musik
             </h2>
-          </div>
-          <div className="flex flex-col sm:items-end gap-1">
-            <p className="text-xs sm:text-sm text-[#86868b] max-w-sm">
+            <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5 max-w-md">
               Playlist pilihan yang menemani aktivitas koding, eksplorasi ide, dan waktu santai.
             </p>
+          </div>
+          <div className="flex flex-col sm:items-end gap-1">
             <a
               href="https://open.spotify.com/playlist/2fMU9es2sX6N89wCIt0vdT"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-medium text-[#0071e3] dark:text-[#2997ff] hover:underline mt-1"
+              className="inline-flex items-center gap-1 text-xs font-medium text-[#1db954] hover:underline self-start sm:self-auto"
             >
               <span>Buka Playlist "Uku" di Spotify</span>
               <ChevronRight className="w-3.5 h-3.5" />

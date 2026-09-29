@@ -46,16 +46,13 @@ export default function StickerPlayground() {
       <div className="max-w-5xl mx-auto">
         
         {/* Top Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-black/[0.05] dark:border-white/[0.06]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <span className="text-xs sm:text-[13px] font-medium text-[#0071e3] dark:text-[#2997ff]">
-              Kanvas Tamu
-            </span>
-            <h3 className="font-heading font-semibold text-xl sm:text-2xl md:text-3xl text-[#1d1d1f] dark:text-[#f5f5f7] mt-0.5">
-              Papan Stiker Interaktif.
-            </h3>
-            <p className="text-xs sm:text-sm text-[#86868b] mt-1">
-              Pilih simbol lalu klik di dalam kanvas untuk meninggalkan jejak interaktif Anda.
+            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Papan Stiker Interaktif
+            </h2>
+            <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5 max-w-md">
+              Pilih simbol lalu klik di area kanvas untuk meninggalkan jejak interaktif kunjungan Anda.
             </p>
           </div>
 

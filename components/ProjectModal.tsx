@@ -51,33 +51,33 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             {/* Content Info */}
             <div className="space-y-4 sm:space-y-5">
               <div className="flex items-start gap-3.5 sm:gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-black/[0.04] dark:bg-white/[0.08] border border-black/[0.05] dark:border-white/[0.08] flex items-center justify-center text-[#0071e3] dark:text-[#2997ff] shrink-0 mt-0.5">
+                <div className="w-12 h-12 rounded-2xl bg-black/[0.04] dark:bg-white/[0.08] border border-black/[0.05] dark:border-white/[0.08] flex items-center justify-center text-[#2563eb] dark:text-[#60a5fa] shrink-0 mt-0.5">
                   <FolderGit2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h2 className="font-heading font-bold text-xl sm:text-2xl md:text-3xl text-[#1d1d1f] dark:text-[#f5f5f7] tracking-tight leading-tight">
+                  <h2 className="font-heading font-bold text-xl sm:text-2xl md:text-3xl text-[#0f172a] dark:text-[#f8fafc] tracking-tight leading-tight">
                     {project.title}
                   </h2>
-                  <p className="text-xs text-[#86868b] mt-1">
+                  <p className="text-xs text-[#64748b] dark:text-[#94a3b8] mt-1">
                     Repositori GitHub • {project.category}
                   </p>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#86868b] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] leading-relaxed">
                 {project.longDescription}
               </p>
 
               {/* Tech Stack Chips */}
               <div className="pt-1 sm:pt-2">
-                <span className="text-xs font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] block mb-2">
+                <span className="text-xs font-semibold text-[#0f172a] dark:text-[#f8fafc] block mb-2">
                   Teknologi:
                 </span>
                 <div className="flex flex-wrap gap-1 sm:gap-1.5">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[11px] sm:text-xs px-2.5 py-0.5 sm:py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.06] text-[#86868b]"
+                      className="text-[11px] sm:text-xs px-2.5 py-0.5 sm:py-1 rounded-md bg-black/[0.03] dark:bg-white/[0.06] text-[#64748b] dark:text-[#94a3b8]"
                     >
                       {tech}
                     </span>
@@ -86,12 +86,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-5 sm:pt-6 border-t border-black/[0.05] dark:border-white/[0.06]">
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-5 sm:pt-6 border-t border-black/[0.06] dark:border-white/[0.08]">
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-[#0071e3] text-white text-xs sm:text-sm font-medium hover:bg-[#0077ed] transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white dark:bg-[#f8fafc] dark:hover:bg-[#e2e8f0] dark:text-[#0f172a] text-xs sm:text-sm font-medium transition-colors"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>Buka Live Demo</span>
@@ -101,7 +101,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-xs sm:text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7] hover:bg-black/[0.08] dark:hover:bg-white/[0.15] transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] border border-black/[0.06] dark:border-white/[0.08] text-xs sm:text-sm font-medium text-[#0f172a] dark:text-[#f8fafc] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors"
                 >
                   <GithubIcon className="w-3.5 h-3.5" />
                   <span>Lihat Kode</span>

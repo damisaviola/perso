@@ -18,21 +18,21 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
     >
       <div className="max-w-5xl mx-auto w-full">
 
-        {/* Apple Segmented Control - Dual Choice: Kerjaan vs Hobi */}
+        {/* Dual Mode Perspective Switcher */}
         <div className="mb-6 sm:mb-8">
-          <div className="w-full sm:w-auto inline-flex p-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.05] dark:border-white/[0.08] backdrop-blur-md">
+          <div className="w-full sm:w-auto inline-flex p-1 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08]">
             <button
               onClick={() => onSelectMode("work")}
-              className={`flex-1 sm:flex-initial justify-center relative px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
+              className={`flex-1 sm:flex-initial justify-center relative px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
                 activeMode === "work"
-                  ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
-                  : "text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
+                  ? "text-[#0f172a] dark:text-[#f8fafc]"
+                  : "text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc]"
               }`}
             >
               {activeMode === "work" && (
                 <motion.div
                   layoutId="heroSegmentedPill"
-                  className="absolute inset-0 bg-white dark:bg-[#2c2c2e] rounded-full shadow-xs border border-black/[0.04] dark:border-white/[0.08]"
+                  className="absolute inset-0 bg-white dark:bg-[#1e293b] rounded-full shadow-xs border border-black/[0.04] dark:border-white/[0.08]"
                   transition={{ type: "spring", stiffness: 450, damping: 35 }}
                 />
               )}
@@ -42,21 +42,21 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
 
             <button
               onClick={() => onSelectMode("hobbies")}
-              className={`flex-1 sm:flex-initial justify-center relative px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
+              className={`flex-1 sm:flex-initial justify-center relative px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
                 activeMode === "hobbies"
-                  ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
-                  : "text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
+                  ? "text-[#0f172a] dark:text-[#f8fafc]"
+                  : "text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc]"
               }`}
             >
               {activeMode === "hobbies" && (
                 <motion.div
                   layoutId="heroSegmentedPill"
-                  className="absolute inset-0 bg-white dark:bg-[#2c2c2e] rounded-full shadow-xs border border-black/[0.04] dark:border-white/[0.08]"
+                  className="absolute inset-0 bg-white dark:bg-[#1e293b] rounded-full shadow-xs border border-black/[0.04] dark:border-white/[0.08]"
                   transition={{ type: "spring", stiffness: 450, damping: 35 }}
                 />
               )}
               <Film className="w-3.5 h-3.5 relative z-10 shrink-0" />
-              <span className="relative z-10 font-medium truncate">Hobi & Minat</span>
+              <span className="relative z-10 font-medium truncate">Hobi & Kultur</span>
             </button>
           </div>
         </div>
@@ -71,16 +71,27 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25 }}
             >
+              {/* Availability Status Chip */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 mb-4 sm:mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Terbuka untuk kolaborasi proyek web</span>
+              </div>
+
               {/* Display Headline */}
-              <h1 className="font-heading font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] leading-[1.1] max-w-3xl">
-                Damianus Saviola.
+              <h1 className="font-heading font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-[#0f172a] dark:text-[#f8fafc] leading-[1.1] max-w-3xl">
+                Damianus Saviola
               </h1>
+
+              {/* Human Bio & Role */}
+              <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[#64748b] dark:text-[#94a3b8] max-w-2xl leading-relaxed font-normal">
+                Frontend Developer & UI Engineer berbasis di Yogyakarta. Berfokus pada perancangan antarmuka web modern yang responsif, terstruktur rapi, dan nyaman digunakan dengan ekosistem Next.js, React, dan Vue.
+              </p>
 
               {/* Action Controls */}
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-6 sm:pt-8">
                 <a
                   href="#projects"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#0071e3] text-white text-xs sm:text-sm font-medium hover:bg-[#0077ed] transition-colors shadow-xs active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white dark:bg-[#f8fafc] dark:hover:bg-[#e2e8f0] dark:text-[#0f172a] text-xs sm:text-sm font-medium transition-all shadow-xs active:scale-95"
                 >
                   <span>Lihat Proyek</span>
                   <ArrowDown className="w-3.5 h-3.5" />
@@ -88,14 +99,14 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
 
                 <a
                   href="#github"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-xs sm:text-sm font-medium text-[#1d1d1f] dark:text-[#f5f5f7] hover:bg-black/[0.08] dark:hover:bg-white/[0.15] transition-colors active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-black/[0.04] dark:bg-white/[0.08] border border-black/[0.06] dark:border-white/[0.08] text-xs sm:text-sm font-medium text-[#0f172a] dark:text-[#f8fafc] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-colors active:scale-95"
                 >
                   <span>Aktivitas GitHub</span>
                 </a>
 
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1 text-xs sm:text-sm font-medium text-[#0071e3] dark:text-[#2997ff] hover:underline px-2 py-2"
+                  className="inline-flex items-center gap-1 text-xs sm:text-sm font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline px-2 py-2"
                 >
                   <span>Hubungi saya</span>
                   <ChevronRight className="w-3.5 h-3.5" />
@@ -109,7 +120,7 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
                     href="https://github.com/damisaviola"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-full text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-colors active:scale-90"
+                    className="p-2 rounded-full text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-colors active:scale-90"
                     aria-label="GitHub Profile"
                   >
                     <GithubIcon className="w-4 h-4" />
@@ -118,14 +129,14 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
                     href="https://linkedin.com/in/damimaturbongs"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-full text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-colors active:scale-90"
+                    className="p-2 rounded-full text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-colors active:scale-90"
                     aria-label="LinkedIn Profile"
                   >
                     <LinkedinIcon className="w-4 h-4" />
                   </a>
                   <a
                     href={`mailto:${PORTFOLIO_DATA.personal.email}`}
-                    className="p-2 rounded-full text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-colors active:scale-90"
+                    className="p-2 rounded-full text-[#64748b] hover:text-[#0f172a] dark:hover:text-[#f8fafc] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-colors active:scale-90"
                     aria-label="Send Email"
                   >
                     <Mail className="w-4 h-4" />
@@ -142,19 +153,19 @@ export default function HeroSection({ activeMode, onSelectMode }: HeroSectionPro
               transition={{ duration: 0.25 }}
             >
               {/* Display Headline */}
-              <h1 className="font-heading font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] leading-[1.1] max-w-3xl">
-                Di Luar Koding.
+              <h1 className="font-heading font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-[#0f172a] dark:text-[#f8fafc] leading-[1.1] max-w-3xl">
+                Di Luar Koding
               </h1>
 
-              <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[#86868b] max-w-2xl leading-relaxed font-normal">
-                Saat rehat dari baris kode, saya menikmati menonton film di <span className="text-[#1d1d1f] dark:text-[#f5f5f7] font-medium">Letterboxd</span>, membaca <span className="text-[#1d1d1f] dark:text-[#f5f5f7] font-medium">komik & novel grafis</span>, bermain game di <span className="text-[#1d1d1f] dark:text-[#f5f5f7] font-medium">Steam</span>, serta memutar playlist di <span className="text-[#1d1d1f] dark:text-[#f5f5f7] font-medium">Spotify</span>.
+              <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-[#64748b] dark:text-[#94a3b8] max-w-2xl leading-relaxed font-normal">
+                Kultur dan minat di waktu rehat — dari arsip tontonan film di <span className="text-[#0f172a] dark:text-[#f8fafc] font-medium">Letterboxd</span>, apresiasi <span className="text-[#0f172a] dark:text-[#f8fafc] font-medium">komik & novel grafis</span>, catatan jam bermain game di <span className="text-[#0f172a] dark:text-[#f8fafc] font-medium">Steam</span>, hingga playlist di <span className="text-[#0f172a] dark:text-[#f8fafc] font-medium">Spotify</span>.
               </p>
 
               {/* Action Controls */}
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-6 sm:pt-8">
                 <a
                   href="#letterboxd"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#0071e3] text-white text-xs sm:text-sm font-medium hover:bg-[#0077ed] transition-colors shadow-xs active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white dark:bg-[#f8fafc] dark:hover:bg-[#e2e8f0] dark:text-[#0f172a] text-xs sm:text-sm font-medium transition-all shadow-xs active:scale-95"
                 >
                   <span>Tontonan Film</span>
                   <ArrowDown className="w-3.5 h-3.5" />

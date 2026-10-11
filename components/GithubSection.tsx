@@ -1,8 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, GitCommit, Sparkles } from "lucide-react";
 import { GithubIcon } from "./SocialIcons";
+import { soundFX } from "@/lib/sound";
 
 const GitHubCalendar = dynamic(
   () => import("react-github-calendar").then((mod) => mod.GitHubCalendar),
@@ -14,49 +15,56 @@ export default function GithubSection() {
   const username = "damisaviola";
 
   return (
-    <section id="github" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]">
+    <section id="github" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.06] dark:border-white/[0.08] relative">
       <div className="max-w-5xl mx-auto">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
-              Kontribusi GitHub
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 mb-2">
+              <GitCommit className="w-3 h-3" />
+              <span>BATTLE LOG & COMMIT STREAK</span>
+            </div>
+            <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Kontribusi & Aktivitas GitHub
             </h2>
             <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5">
-              Catatan komit dan riwayat kontribusi open-source sepanjang satu tahun terakhir.
+              Heatmap akumulasi XP komit dan kontribusi kode open-source sepanjang satu tahun terakhir.
             </p>
           </div>
           <a
             href={`https://github.com/${username}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs sm:text-sm font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline self-start sm:self-auto"
+            onClick={() => soundFX.playClick()}
+            onMouseEnter={() => soundFX.playHover()}
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 hover:underline self-start sm:self-auto"
           >
+            <GithubIcon className="w-3.5 h-3.5" />
             <span>github.com/{username}</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </a>
         </div>
 
-        {/* Unboxed GitHub Activity View */}
-        <div className="mt-8 sm:mt-10">
+        {/* Gaming Heatmap Container */}
+        <div className="mt-8 sm:mt-10 p-5 sm:p-7 rounded-2xl bg-white dark:bg-[#0c1220] border-2 border-black/[0.06] dark:border-emerald-500/20 shadow-sm">
           <div className="flex items-center justify-between gap-3 mb-6 pb-4 border-b border-black/[0.04] dark:border-white/[0.06]">
-            <div className="flex items-center gap-2.5 sm:gap-3">
-              <div className="w-8 h-8 rounded-full bg-black/[0.05] dark:bg-white/[0.1] text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center justify-center shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
                 <GithubIcon className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="font-heading font-medium text-xs sm:text-sm text-[#1d1d1f] dark:text-[#f5f5f7]">
-                  Aktivitas 12 Bulan Terakhir
+                <h3 className="font-heading font-bold text-xs sm:text-sm text-[#0f172a] dark:text-[#f8fafc]">
+                  Heatmap Aktivitas 365 Hari
                 </h3>
-                <p className="text-[11px] sm:text-xs text-[#86868b]">
-                  Commit dan kontribusi pada repositori publik.
+                <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                  Sinkronisasi live komit dan branch pull request.
                 </p>
               </div>
             </div>
 
-            <span className="text-xs text-[#86868b]">
-              @damisaviola
+            <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
+              @{username}
             </span>
           </div>
 
@@ -65,7 +73,6 @@ export default function GithubSection() {
             <div className="min-w-[680px] sm:min-w-[800px] flex justify-center py-2">
               <GitHubCalendar 
                 username={username} 
-                colorScheme="light"
                 blockSize={12}
                 blockMargin={3.5}
                 fontSize={12}
@@ -78,32 +85,15 @@ export default function GithubSection() {
                     '#216e39',
                   ],
                   dark: [
-                    '#1c1c1e',
+                    '#161b22',
                     '#0e4429',
                     '#006d32',
                     '#26a641',
                     '#39d353',
-                  ]
-                }}
-                tooltips={{
-                  activity: {
-                    text: (activity) => `${activity.count} kontribusi pada ${activity.date}`,
-                  },
-                  colorLegend: {
-                    text: (level) => {
-                      if (level === 0) return 'Tidak ada kontribusi';
-                      if (level === 1) return 'Sedikit';
-                      if (level === 2) return 'Sedang';
-                      if (level === 3) return 'Banyak';
-                      return 'Sangat aktif';
-                    },
-                  },
+                  ],
                 }}
               />
             </div>
-          </div>
-          <div className="text-[10px] text-[#86868b] sm:hidden text-center mt-1">
-            ← Geser untuk melihat seluruh riwayat →
           </div>
         </div>
 

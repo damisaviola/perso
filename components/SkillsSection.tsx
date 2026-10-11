@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 import {
   Code2,
   FileCode,
@@ -16,11 +15,14 @@ import {
   Layers,
   Terminal,
   Cloud,
-  Bot,
-  Wrench,
+  Shield,
+  Sword,
+  Wand2,
 } from "lucide-react";
 import { PORTFOLIO_DATA, Skill } from "@/lib/data";
 import { FigmaIcon } from "./SocialIcons";
+import { soundFX } from "@/lib/sound";
+import { useGame } from "./GameContext";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Code2,
@@ -36,18 +38,19 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Figma: FigmaIcon,
   Terminal,
   Cloud,
-  Bot,
 };
 
 export default function SkillsSection() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [inspectedSkill, setInspectedSkill] = useState<Skill | null>(null);
+  const { addXp, unlockAchievement } = useGame();
 
   const categories = [
-    "All",
-    "Frontend",
-    "Backend",
-    "Database",
-    "DevOps",
+    { id: "All", label: "ALL GEAR" },
+    { id: "Frontend", label: "⚔️ FRONTEND WEAPONS" },
+    { id: "Backend", label: "🔮 BACKEND SPELLS" },
+    { id: "Database", label: "💾 DATA TOMES" },
+    { id: "DevOps", label: "🛡️ DEVOPS RELICS" },
   ];
 
   const filteredSkills =
@@ -57,111 +60,128 @@ export default function SkillsSection() {
           (skill) => skill.category === selectedCategory
         );
 
+  const getRarity = (level: number) => {
+    if (level >= 90) return { name: "LEGENDARY", color: "#f59e0b", border: "border-amber-500/60 dark:border-amber-400/50", glow: "shadow-[0_0_15px_rgba(245,158,11,0.25)]", tag: "bg-amber-500/20 text-amber-500" };
+    if (level >= 85) return { name: "EPIC", color: "#a855f7", border: "border-purple-500/60 dark:border-purple-400/50", glow: "shadow-[0_0_15px_rgba(168,85,247,0.25)]", tag: "bg-purple-500/20 text-purple-400" };
+    return { name: "RARE", color: "#38bdf8", border: "border-sky-500/60 dark:border-sky-400/50", glow: "shadow-[0_0_15px_rgba(56,189,248,0.25)]", tag: "bg-sky-500/20 text-sky-400" };
+  };
+
+  const handleInspect = (skill: Skill, e: React.MouseEvent) => {
+    soundFX.playCoin();
+    setInspectedSkill(skill);
+    addXp(15, `Inspected ${skill.name}`, { x: e.clientX, y: e.clientY });
+    unlockAchievement("inspect_project");
+  };
+
   return (
-    <section id="skills" className="py-16 sm:py-24 px-4 sm:px-8 relative bg-neo-grid">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header */}
-        <div className="flex flex-col items-start gap-2 mb-10">
-          <div className="bg-[#3B82F6] text-white neo-border px-4 py-1 rounded-full font-heading font-black text-sm uppercase shadow-neo flex items-center gap-1.5">
-            <Wrench className="w-4 h-4" />
-            <span>MY TECH ARSENAL</span>
+    <section id="skills" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.06] dark:border-white/[0.08] relative">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.06] dark:border-white/[0.08]">
+          <div>
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 mb-2">
+              <Sword className="w-3 h-3" />
+              <span>CHARACTER LOADOUT & INVENTORY</span>
+            </div>
+            <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Skill Tree & Equipment
+            </h2>
+            <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5 max-w-md">
+              Koleksi senjata kode, spell backend, dan perlengkapan teknis yang telah dikuasai di medan pengembangan web.
+            </p>
           </div>
 
-          <h2 className="font-heading font-black text-4xl sm:text-5xl md:text-6xl tracking-tight uppercase text-[#111111] dark:text-white">
-            SKILLS
-          </h2>
+          <div className="flex items-center gap-2">
+            <div className="px-3 py-1.5 rounded-xl bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.08] text-right font-mono text-xs">
+              <span className="text-slate-400 text-[10px] block">TOTAL GEAR COUNT</span>
+              <span className="font-bold text-cyan-600 dark:text-cyan-400">{PORTFOLIO_DATA.skills.length} SLOTS EQUIPPED</span>
+            </div>
+          </div>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2.5 mb-10">
+        {/* Category Filter Tabs */}
+        <div className="flex flex-wrap gap-2 mt-8 mb-8">
           {categories.map((cat) => {
-            const isSelected = selectedCategory === cat;
+            const isSelected = selectedCategory === cat.id;
             return (
               <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`font-heading font-extrabold text-sm sm:text-base px-4 py-2 rounded-2xl neo-btn transition-all ${
+                key={cat.id}
+                onClick={() => {
+                  soundFX.playClick();
+                  setSelectedCategory(cat.id);
+                }}
+                onMouseEnter={() => soundFX.playHover()}
+                className={`font-mono text-xs font-bold px-3.5 py-2 rounded-xl transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-[#FFD60A] text-[#111111] translate-x-[-2px] translate-y-[-2px] shadow-neo-lg"
-                    : "bg-white dark:bg-[#1A1A28] text-[#111111] dark:text-white"
+                    ? "bg-[#0f172a] text-white dark:bg-cyan-500 dark:text-black shadow-md scale-102"
+                    : "bg-black/[0.04] dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 hover:bg-black/[0.08] dark:hover:bg-white/[0.1]"
                 }`}
               >
-                {cat}
+                {cat.label}
               </button>
             );
           })}
         </div>
 
-        {/* Skills Cards Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-        >
+        {/* Inventory Item Slots Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
           <AnimatePresence>
-            {filteredSkills.map((skill: Skill) => {
+            {filteredSkills.map((skill, idx) => {
               const IconComponent = iconMap[skill.iconName] || Code2;
+              const rarity = getRarity(skill.level);
+
               return (
                 <motion.div
                   key={skill.name}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                  className="neo-card neo-card-hover rounded-3xl p-5 flex flex-col justify-between"
-                  style={{ backgroundColor: skill.color }}
+                  transition={{ duration: 0.15, delay: idx * 0.02 }}
+                  onClick={(e) => handleInspect(skill, e)}
+                  onMouseEnter={() => soundFX.playHover()}
+                  className={`group relative p-3 sm:p-4 rounded-2xl bg-[#ffffff] dark:bg-[#0c1220] border-2 ${rarity.border} ${rarity.glow} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-pointer flex flex-col justify-between`}
                 >
-                  <div className="space-y-4">
-                    {/* Top Row: Icon & Category Badge */}
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 bg-white dark:bg-[#111111] text-[#111111] dark:text-white neo-border rounded-2xl flex items-center justify-center shadow-neo">
-                        {skill.logo ? (
-                          <motion.div
-                            whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 0] }}
-                            transition={{ duration: 0.5 }}
-                            className="w-8 h-8 relative flex items-center justify-center"
-                          >
-                            <img
-                              src={typeof skill.logo === 'string' ? skill.logo : skill.logo.src}
-                              alt={skill.name}
-                              className="w-8 h-8 object-contain drop-shadow-sm"
-                            />
-                          </motion.div>
-                        ) : (
-                          <IconComponent className="w-6 h-6" />
-                        )}
-                      </div>
-                      <span className="bg-[#111111] text-white font-heading font-bold text-xs px-3 py-1 rounded-full neo-border-sm">
-                        {skill.experience}
-                      </span>
+                  {/* Top: Icon & Rarity Tag */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="w-10 h-10 rounded-xl bg-black/[0.03] dark:bg-white/[0.06] flex items-center justify-center p-2 border border-black/[0.06] dark:border-white/[0.08]">
+                      {skill.logo ? (
+                        <img
+                          src={typeof skill.logo === "string" ? skill.logo : skill.logo.src}
+                          alt={skill.name}
+                          className="w-full h-full object-contain filter group-hover:scale-110 transition-transform"
+                        />
+                      ) : (
+                        <IconComponent className="w-5 h-5 text-slate-700 dark:text-slate-200" />
+                      )}
                     </div>
-
-                    {/* Skill Title & Category */}
-                    <div>
-                      <h3 className="font-heading font-black text-xl text-[#111111] tracking-tight">
-                        {skill.name}
-                      </h3>
-                      <span className="text-xs font-extrabold uppercase text-[#111111]/80">
-                        {skill.category}
-                      </span>
-                    </div>
+                    <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded ${rarity.tag}`}>
+                      {rarity.name}
+                    </span>
                   </div>
 
-                  {/* Level Progress Bar */}
-                  <div className="mt-6 pt-4 border-t-3 border-[#111111]">
-                    <div className="flex items-center justify-between font-heading font-black text-xs text-[#111111] mb-1.5">
-                      <span>PROFICIENCY</span>
-                      <span>{skill.level}%</span>
-                    </div>
+                  {/* Middle: Name & Level */}
+                  <div className="mt-3">
+                    <h4 className="font-heading font-bold text-sm text-[#0f172a] dark:text-[#f8fafc] group-hover:text-cyan-500 transition-colors">
+                      {skill.name}
+                    </h4>
+                    <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                      {skill.category}
+                    </span>
+                  </div>
 
-                    <div className="w-full h-4 bg-white dark:bg-[#1A1A28] neo-border-sm rounded-full overflow-hidden p-0.5">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="h-full bg-[#111111] rounded-full"
+                  {/* Bottom: Power Rating Bar */}
+                  <div className="mt-3 pt-2.5 border-t border-black/[0.05] dark:border-white/[0.06]">
+                    <div className="flex items-center justify-between text-[10px] font-mono">
+                      <span className="text-slate-400">PWR</span>
+                      <span className="font-bold text-slate-700 dark:text-slate-200">{skill.level}/100</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full mt-1 overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${skill.level}%`,
+                          backgroundColor: rarity.color,
+                        }}
                       />
                     </div>
                   </div>
@@ -169,67 +189,53 @@ export default function SkillsSection() {
               );
             })}
           </AnimatePresence>
-        </motion.div>
-
-        {/* Core Tech Stack Summary */}
-        <div className="mt-12 bg-[#FFD60A] neo-card rounded-3xl p-6 sm:p-8 border-4 border-[#111111] shadow-neo-xl">
-          <div className="flex items-center gap-3 mb-6">
-            <Sparkles className="w-8 h-8 text-[#111111]" />
-            <h3 className="font-heading font-black text-2xl sm:text-3xl text-[#111111] uppercase tracking-tight">
-              Tech Stack Inti
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <div className="bg-white dark:bg-[#1A1A28] p-5 rounded-2xl neo-border-sm shadow-neo flex flex-col justify-between">
-              <div>
-                <h4 className="font-heading font-black text-lg text-[#3B82F6] uppercase mb-2">Frontend</h4>
-                <p className="font-medium text-gray-800 dark:text-gray-300 mb-4">HTML, CSS, JavaScript (React, Next.js, Tailwind CSS, Bootstrap).</p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <img src="/assets/logo/html logo.png" alt="HTML" className="w-8 h-8 object-contain drop-shadow-sm" title="HTML" />
-                <img src="/assets/logo/javascript.webp" alt="JavaScript" className="w-8 h-8 object-contain drop-shadow-sm" title="JavaScript" />
-                <img src="/assets/logo/typescript.webp" alt="TypeScript" className="w-8 h-8 object-contain drop-shadow-sm" title="TypeScript" />
-                <img src="/assets/logo/reactjs.webp" alt="React" className="w-8 h-8 object-contain drop-shadow-sm" title="React" />
-                <img src="/assets/logo/next_js_145038.webp" alt="Next.js" className="w-8 h-8 object-contain drop-shadow-sm" title="Next.js" />
-              </div>
-            </div>
-            
-            <div className="bg-white dark:bg-[#1A1A28] p-5 rounded-2xl neo-border-sm shadow-neo flex flex-col justify-between">
-              <div>
-                <h4 className="font-heading font-black text-lg text-[#FF5A5F] uppercase mb-2">Backend</h4>
-                <p className="font-medium text-gray-800 dark:text-gray-300 mb-4">PHP (Laravel, CodeIgniter), Golang, RESTful API.</p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <img src="/assets/logo/PHP-logo.svg.webp" alt="PHP" className="w-8 h-8 object-contain drop-shadow-sm" title="PHP" />
-                <img src="/assets/logo/Laravel.svg.webp" alt="Laravel" className="w-8 h-8 object-contain drop-shadow-sm" title="Laravel" />
-                <img src="/assets/logo/codeigniter_plain_logo_icon_146591.webp" alt="CodeIgniter" className="w-8 h-8 object-contain drop-shadow-sm" title="CodeIgniter" />
-                <img src="/assets/logo/Go-Logo_LightBlue.png" alt="Golang" className="w-8 h-8 object-contain drop-shadow-sm" title="Golang" />
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-[#1A1A28] p-5 rounded-2xl neo-border-sm shadow-neo flex flex-col justify-between">
-              <div>
-                <h4 className="font-heading font-black text-lg text-[#22C55E] uppercase mb-2">Database</h4>
-                <p className="font-medium text-gray-800 dark:text-gray-300 mb-4">MySQL (Normalisasi, Query Optimization), Firebase, Supabase.</p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <img src="/assets/logo/mysql.webp" alt="MySQL" className="w-8 h-8 object-contain drop-shadow-sm" title="MySQL" />
-                <img src="/assets/logo/supabase.webp" alt="Supabase" className="w-8 h-8 object-contain drop-shadow-sm" title="Supabase" />
-                <img src="/assets/logo/postgresql.webp" alt="PostgreSQL" className="w-8 h-8 object-contain drop-shadow-sm" title="PostgreSQL" />
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-[#1A1A28] p-5 rounded-2xl neo-border-sm shadow-neo flex flex-col justify-between">
-              <div>
-                <h4 className="font-heading font-black text-lg text-[#EC4899] uppercase mb-2">Metodologi</h4>
-                <p className="font-medium text-gray-800 dark:text-gray-300 mb-4">Clean Code, SDLC, Git Version Control.</p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <img src="/assets/logo/docker.png" alt="Docker" className="w-8 h-8 object-contain drop-shadow-sm" title="Docker" />
-              </div>
-            </div>
-          </div>
         </div>
+
+        {/* Selected Skill Item Detail Tooltip Box */}
+        <AnimatePresence>
+          {inspectedSkill && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="mt-8 p-4 sm:p-5 rounded-2xl bg-cyan-950/20 dark:bg-cyan-950/40 border border-cyan-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center p-2.5">
+                  {inspectedSkill.logo ? (
+                    <img
+                      src={typeof inspectedSkill.logo === "string" ? inspectedSkill.logo : inspectedSkill.logo.src}
+                      alt={inspectedSkill.name}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <Zap className="w-6 h-6 text-cyan-400" />
+                  )}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-heading font-black text-lg text-white">
+                      {inspectedSkill.name}
+                    </h3>
+                    <span className="text-xs font-mono font-bold text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
+                      LEVEL {inspectedSkill.level}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 font-mono mt-0.5">
+                    Pengalaman: <span className="text-white font-bold">{inspectedSkill.experience}</span> &bull; Kategori: <span className="text-cyan-300">{inspectedSkill.category}</span>
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setInspectedSkill(null)}
+                className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-mono text-slate-300 hover:text-white transition-colors cursor-pointer"
+              >
+                TUTUP INSPEKSI &times;
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>

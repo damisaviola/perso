@@ -6,15 +6,21 @@ import {
   ExternalLink,
   ChevronRight,
   FolderGit2,
+  Sword,
+  Sparkles,
+  Trophy,
 } from "lucide-react";
 import { Project } from "@/lib/data";
 import ProjectModal from "./ProjectModal";
 import { GithubIcon } from "./SocialIcons";
+import { soundFX } from "@/lib/sound";
+import { useGame } from "./GameContext";
 
 export default function ProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const { addXp, unlockAchievement } = useGame();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -33,18 +39,29 @@ export default function ProjectsSection() {
     fetchProjects();
   }, []);
 
+  const handleOpenProject = (project: Project, e: React.MouseEvent) => {
+    soundFX.playCoin();
+    setActiveProject(project);
+    addXp(30, `Quest Dossier: ${project.title}`, { x: e.clientX, y: e.clientY });
+    unlockAchievement("inspect_project");
+  };
+
   return (
-    <section id="projects" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.05] dark:border-white/[0.06]">
+    <section id="projects" className="py-16 sm:py-24 md:py-28 px-4 sm:px-8 border-b border-black/[0.06] dark:border-white/[0.08] relative">
       <div className="max-w-5xl mx-auto">
 
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 pb-8 sm:pb-10 border-b border-black/[0.06] dark:border-white/[0.08]">
           <div>
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
-              Proyek Terbaru
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 mb-2">
+              <Sword className="w-3 h-3" />
+              <span>ACTIVE BOUNTY BOARD & COMPLETED MISSIONS</span>
+            </div>
+            <h2 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl text-[#0f172a] dark:text-[#f8fafc]">
+              Bounty Proyek & Ekspedisi
             </h2>
             <p className="text-xs sm:text-sm text-[#64748b] dark:text-[#94a3b8] mt-1.5 max-w-md">
-              Koleksi aplikasi web terbaru yang dikembangkan dan disinkronkan dari repositori GitHub.
+              Koleksi misi aplikasi web yang telah dibangun dan disinkronkan secara langsung dari arsip GitHub.
             </p>
           </div>
           <div className="flex flex-col sm:items-end gap-1">
@@ -52,21 +69,23 @@ export default function ProjectsSection() {
               href="https://github.com/damisaviola?tab=repositories"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline self-start sm:self-auto"
+              onClick={() => soundFX.playClick()}
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 hover:underline self-start sm:self-auto"
             >
+              <GithubIcon className="w-3.5 h-3.5" />
               <span>Semua repositori di GitHub</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
-        {/* Editorial Projects Ledger */}
-        <div className="mt-8 sm:mt-10 divide-y divide-black/[0.06] dark:divide-white/[0.08]">
+        {/* Interactive Gaming Bounty Ledger */}
+        <div className="mt-8 sm:mt-10 space-y-4">
           {loading ? (
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="py-7 sm:py-8 first:pt-4 flex flex-col gap-3 animate-pulse"
+                className="p-6 rounded-2xl bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.06] dark:border-white/[0.06] flex flex-col gap-3 animate-pulse"
               >
                 <div className="flex items-center justify-between">
                   <div className="h-6 bg-black/[0.04] dark:bg-white/[0.05] rounded-md w-1/3" />
@@ -82,40 +101,50 @@ export default function ProjectsSection() {
           ) : (
             <AnimatePresence>
               {projects.map((project: Project, idx) => {
+                const isFeatured = idx === 0 || project.badge === "FEATURED" || project.badge === "BEST";
                 return (
                   <motion.div
                     key={project.id || idx}
-                    initial={{ opacity: 0, y: 8 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: idx * 0.04 }}
-                    onClick={() => setActiveProject(project)}
-                    className="group py-6 sm:py-8 first:pt-4 -mx-3 sm:-mx-4 px-3 sm:px-4 rounded-xl hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors cursor-pointer"
+                    onClick={(e) => handleOpenProject(project, e)}
+                    onMouseEnter={() => soundFX.playHover()}
+                    className={`group relative p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#0c1220] border-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl cursor-pointer ${
+                      isFeatured
+                        ? "border-cyan-500/40 dark:border-cyan-500/30 hover:border-cyan-400"
+                        : "border-black/[0.06] dark:border-white/[0.08] hover:border-cyan-500/40"
+                    }`}
                   >
                     <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 sm:gap-4">
                       {/* Left: Title & Badge */}
                       <div className="flex items-baseline gap-2.5 flex-wrap">
-                        <h3 className="font-heading font-semibold text-lg sm:text-xl md:text-2xl text-[#0f172a] dark:text-[#f8fafc] group-hover:text-[#2563eb] dark:group-hover:text-[#60a5fa] transition-colors">
+                        <span className="font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400">
+                          [QUEST #{idx + 1}]
+                        </span>
+                        <h3 className="font-heading font-black text-lg sm:text-xl md:text-2xl text-[#0f172a] dark:text-[#f8fafc] group-hover:text-cyan-500 transition-colors">
                           {project.title}
                         </h3>
-                        <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-black/[0.04] dark:bg-white/[0.06] text-[#64748b] dark:text-[#94a3b8]">
-                          {project.badge || (idx === 0 ? "Terbaru" : "Repositori")}
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                          {project.badge || "S-RANK"}
                         </span>
-                        <span className="text-xs text-[#64748b] dark:text-[#94a3b8] hidden sm:inline">
-                          • {project.category}
+                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400 hidden sm:inline">
+                          &bull; {project.category}
                         </span>
                       </div>
 
-                      {/* Right: Actions */}
-                      <div className="flex items-center gap-3 text-xs text-[#64748b] dark:text-[#94a3b8] self-start md:self-auto shrink-0">
+                      {/* Right: Loot Actions */}
+                      <div className="flex items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400 self-start md:self-auto shrink-0">
                         {project.liveUrl && project.liveUrl !== project.githubUrl && (
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
+                              soundFX.playClick();
                               window.open(project.liveUrl, "_blank");
                             }}
-                            className="inline-flex items-center gap-1 font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline cursor-pointer py-1"
+                            className="inline-flex items-center gap-1 font-bold text-cyan-600 dark:text-cyan-400 hover:underline cursor-pointer py-1"
                           >
-                            <span>Live Demo</span>
+                            <span>LIVE DEMO</span>
                             <ExternalLink className="w-3.5 h-3.5" />
                           </button>
                         )}
@@ -123,33 +152,35 @@ export default function ProjectsSection() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
+                            soundFX.playClick();
                             window.open(project.githubUrl, "_blank");
                           }}
-                          className="inline-flex items-center gap-1 hover:text-[#0f172a] dark:hover:text-[#f8fafc] transition-colors cursor-pointer py-1"
+                          className="inline-flex items-center gap-1 hover:text-cyan-500 transition-colors cursor-pointer py-1"
                           title="Lihat source code di GitHub"
                         >
                           <GithubIcon className="w-3.5 h-3.5" />
-                          <span className="hidden sm:inline">Kode</span>
+                          <span className="hidden sm:inline">SOURCE</span>
                         </button>
 
-                        <span className="inline-flex items-center gap-0.5 text-[#2563eb] dark:text-[#60a5fa] font-medium group-hover:translate-x-0.5 transition-transform">
-                          <span>Detail</span>
+                        <span className="inline-flex items-center gap-1 font-bold text-cyan-600 dark:text-cyan-400 group-hover:translate-x-1 transition-transform">
+                          <span>INSPECT</span>
                           <ChevronRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
 
-                    {/* Description */}
-                    <p className="mt-2 text-xs sm:text-sm text-[#86868b] leading-relaxed max-w-3xl">
+                    {/* Mission Description */}
+                    <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-3xl">
                       {project.description}
                     </p>
 
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap items-center gap-1.5 mt-3.5">
+                    {/* Loot Drop: Tech Stack Badges */}
+                    <div className="flex flex-wrap items-center gap-1.5 mt-4 pt-3 border-t border-black/[0.04] dark:border-white/[0.05]">
+                      <span className="text-[10px] font-mono text-slate-400 mr-1">LOOT DROPS:</span>
                       {project.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-black/[0.03] dark:bg-white/[0.04] text-[#86868b] border border-black/[0.03] dark:border-white/[0.04]"
+                          className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-black/[0.04] dark:bg-white/[0.06] text-slate-700 dark:text-slate-300 border border-black/[0.04] dark:border-white/[0.06]"
                         >
                           {tech}
                         </span>
@@ -172,4 +203,3 @@ export default function ProjectsSection() {
     </section>
   );
 }
-
